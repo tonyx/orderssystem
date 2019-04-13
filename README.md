@@ -51,11 +51,11 @@ nuget restore -SolutionDirectory .
 3) download separately the Npgsql-2.2.1-net45, from https://www.nuget.org/packages/Npgsql/2.2.1. In case of troubles, you may want to
 download the nupkg and then install from the local directory, by using the command 
 ```
-nuget install MyPackage -Source %cd% -OutputDirectory packages 
+nuget install Npgsql -version 2.2.1 -Source %cd% -OutputDirectory packages 
 ```
 or
 ```
-nuget install MyPackage -Source `pwd` -OutputDirectory packages 
+nuget install Npgsql -version 2.2.1 -Source `pwd` -OutputDirectory packages 
 ```
 In th Db.fs file you may want to assign the resPath variable to the full path of the net45 subfolder of Npgsql.2.2.1 containing the Npgsql.dll (i.e. somepath/Npgsql.2.2.1/lib/net45) 
 This will help resolving the db-entity binding at compile time, and will also help editing with ionide (providing you set fsautocomplete config to "net" rather than to "netcore")
