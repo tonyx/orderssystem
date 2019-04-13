@@ -19,16 +19,13 @@ These instructions will get you a copy of the project up and running on your loc
 
   postgres 9.6 or superior
 
-```
-Give examples
-```
 
 ### Installing
 
 
 1) clone the project:
 ```
-git clone git@github.com:tonyx/orderssyystem.git
+git clone git@github.com:tonyx/orderssystem.git
 ```
 2) in the subdirectory ordersystmprevious run the command:
 ```
@@ -90,6 +87,12 @@ I'll try to add soon a standard non proprietary P.O.S. drivers.
 
 * **Antonio (Tonino) Lucca**  tonyx1@gmail.com
 
+# Credits:
+The code style is inspired by the musicstore example given with the Suave.IO. Basic functionalities like authentication is taken from their example.
+The autocomplete feature in javascript is taken from https://www.w3schools.com/howto/howto_js_autocomplete.asp
+
+
+
 ## License
 
 This project is licensed under the GPL License  (https://www.gnu.org/licenses/gpl.txt)
@@ -97,11 +100,12 @@ This project is licensed under the GPL License  (https://www.gnu.org/licenses/gp
 
 ## Issues:
 
-To print, a plain text file is sent to the printer. Special formatting (different sizes and stiles) will come soon.
+To print, a plain text file is sent to the printer. Special formatting (different sizes and stiles) will be one of the next features.
 
 
 ## Donations:
 
-
+Donations are welcome.
+I am also available for professional support services. Just drop me a message, in case.
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=54LADGL7GWC9Y)
