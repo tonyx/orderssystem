@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<html>
+
+<head>
+    <title>Orders system</title>
+    <link href="/Site.css?v7" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="header">
+        <h1>
+            <a href="/">Orders System</a>
+            <br>
+            <br>
+        </h1>
+    </div>
+    <div id="main">
+        <br>
+        <br>
+        <br>
+        <h2>Table: {{model.table}}</h2>
+        <ul>
+            {% for item in model.wrapped_order_items %}
+            <li>
+                n. {{item.quantity}} {{%item.name%}}. Net price: {{%item.Price%}}
+            </li>
+            {% endfor %}
+        </ul>
+        <br>
+        <ul>
+        <li>Gross total: {{model.wrapped_order.totale}}</li>
+        {% if model.wrapped_order.totale != model.wrapped_order.totale_scontato %}
+        <li>Sconto/sovrapprezzo: {{model.wrapped_order.sconto}}
+        <li>Net total: {{model.wrapped_order.totale_scontato}}</li>
+        {% endif %} 
+        </ul>
+
+        <h2>Pament options:</h2>
+
+        {% for paymentitem in model.wrapped_payment_items %}
+            {{paymentitem.tender_name}}:   {{paymentitem.amount}}   <a href ="/orders/removePaymentItemOfOrder/{{paymentitem.payment_item_id}}/{{model.order_id}}" class="buttonX"> elimina  </a> 
+            <br>
+            <br>
+        {% endfor %}
+       
+
+        <ul id="item-list">
+            <innerp>
+                <br>
+                <br>
+                {% if model.residual_payment_due >0 %}
+                    <form method="GET">
+                        Payment:    
+                        <select name ="tenderid">
+                            {% for paymentmethod in model.tender_codes%}
+                            <option  value ="{{paymentmethod.index}}"  >{{paymentmethod.name}}</option>
+                            {% endfor %}
+                        </select>
+                        ammount: <input name= "amount" type = "number" value = "{{model.residual_payment_due}}"/>
+                        <br>
+                        <input type="submit" value="Aggiungi">
+                    </form>
+                {% endif %}
+                <br>
+                <br>
+                <br>
+                <a href ="/orders/seeDoneOrders#order{{model.orderid}}" class="buttonX"> ritorna </a>
+                {% if model.residual_payment_due == 0 %}
+                <a href ="/orders/createEcrReceiptInstructionForOrder/{{model.order_id}}" class="buttonX">conferma</a>
+                {% endif %}
+            </innerp>
+        </ul>
+    </div>
+</body>
+
+</html>

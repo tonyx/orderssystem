@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+<script>
+        var mydata = [
+                {% for item in model.names %}
+                 "{{ item.name }}",
+                {% endfor %} 
+            ]
+
+        let ingredientsMap = new Map([
+            {% for item in model.names %}
+            ["{{item.index}}","{{item.name}}"],
+            {% endfor %}
+         ]);
+
+        let ingredientsUnitMeasuresMap = new Map([
+            {% for item in model.measures %}
+            ["{{item.index}}","{{item.unitmeasure}}"],
+            {% endfor %}
+         ]);
+
+	
+        </script>
+<html>
+    <head>
+        <title>   Orders system</title>
+        <link href="/Site.css"  rel="stylesheet"  type="text/css">
+    </head>
+    <body>
+        <div id="header">
+            <h1><a href="/">Orders System</a>
+                <br>
+                <br></h1>
+            <h2>{{model.message}}</h2>        
+            </div>
+            <div id="main"><h2>Aggiungi ingrediente </h2><div id="register-message"></div>
+            <form autocomplete = "off" method="POST"><fieldset><legend>Ingrediente</legend>
+                <div class="editor-label">Nome (selezione)</div>
+                <div class="editor-field">
+                    
+                    <select name="IngredientBySelect">
+                        {% for item in model.names %}
+                        <option value="{{item.index}}">{{item.name}}</option>
+                        {% endfor %}
+                    </select>
+                    </div><div class="editor-label">Nome (testo libero)</div>
+                    <div class="autocomplete" style="width:300px;">
+                    <input name="IngredientByText" type="text"></div> 
+                    <div class="editor-label" id="quantityLabel">Quantit&#224;</div>
+                    <div class="editor-field"><input name="Quantity" type="number" min="0.01" step="0.01"></div>
+                </fieldset>
+                <input type="submit" value="Aggiungi"></form>
+                <script type="text/javascript" src="/jquery-3.1.1.min.js"></script>
+                <script type="text/javascript" src="/autocompleteIng.js?g"></script></div>
+            </body>
+            </html>

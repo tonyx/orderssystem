@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+
+<div id="header"><h1><a href="/">Orders System</a><br><br></h1></div>
+
+
+<html>
+
+<head>
+  <title>Order System</title>
+  <link href="/Site.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <form method="GET">
+    <fieldset>
+      <legend>for each table, select th order item merge/move to table: {{model.targetorder.tavolo}}</legend>
+      {% for item in model.orderandorderitems %}
+      <input type ="checkbox" name="order{{item.order.order_id}}"> tavolo: {{item.order.tavolo}}</input>
+      <input type ="hidden" name="order{{item.order.order_id}}"value="on"/>
+      <br>
+
+      {%for orderitem in item.orderitems %}
+      <input type ="checkbox" name="orderitem{{orderitem.orderitemid}}">  {{orderitem.Name}}</input>
+      <br>
+
+      {% endfor %}
+
+      <br>
+      {% endfor%}
+
+      <input type="submit" value="Invia">
+    </fieldset>
+  </form>
+
+
+
+  <br/>
+  <br/>
+
+
+  <a href="{{model.backurl}}">ritorna</a>
+
+</body>
+
+</html>

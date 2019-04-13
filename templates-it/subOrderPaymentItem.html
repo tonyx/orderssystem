@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<html>
+
+<head>
+    <title>Orders system</title>
+    <link href="/Site.css?v7" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="header">
+        <h1>
+            <a href="/">Orders System</a>
+            <br>
+            <br>
+        </h1>
+    </div>
+    <div id="main">
+        <br>
+        <br>
+        <br>
+        <h2>Tavolo: {{model.table}}</h2>
+        <ul>
+            {% for item in model.wrapped_order_items %}
+                <li>
+                    n. {{item.quantity}} {{%item.name%}}. Prezzo netto: {{item.price}}
+                </li>
+            {% endfor %}
+                <li>Totale lordo: {{model.wrapped_sub_order.subtotal}}</li>
+        </ul>
+        <form method="get">
+            modifica(sconto/maggiorazione) % :<input name="percentadjustment" type="number" step="0.01" value="{{model.wrapped_sub_order.subtotal_percent_adjustment}}"/>
+            <input type="Submit" value="modifica">
+        </form>
+        <form method="get">
+            modifica(sconto/maggiorazione):<input name="adjustment" type="number" step="0.01" value="{{model.wrapped_sub_order.subtotaladjustment}}"/>
+            <input type="Submit" value="modifica">
+        </form>
+
+        {% if model.wrapped_sub_order.subtotaladjustment != 0 %}
+            <ul>
+                <li>maggiorazione/sconto: {{model.wrapped_sub_order.subtotaladjustment}}</li>
+                <li>Totale netto: {{model.wrapped_sub_order.subtotal |plus: model.wrapped_sub_order.subtotaladjustment}}</li>
+            </ul>
+        {% endif %}
+
+        {% if model.wrapped_sub_order.subtotal_percent_adjustment != 0 %}
+            <ul>
+                <li>maggiorazione/sconto: {{model.wrapped_sub_order.subtotal_adjustment_from_percentage}}</li>
+                <li>Totale netto: {{model.wrapped_sub_order.subtotal |plus: model.wrapped_sub_order.subtotal_adjustment_from_percentage }}</li>
+            </ul>
+            <br>
+            <a href="/orders/removeAllDiscountsOfSubOrder/{{model.wrapped_sub_order.suborderid}}" class="buttonX">elimina sconti/maggiorazioni</a>
+            <br>
+
+        {% endif %}
+
+        <h2>modalita' di pagamento:</h2>
+
+        {% for paymentitem in model.wrapped_payment_items %}
+            {{paymentitem.tender_name}}:   {{paymentitem.amount}}   <a href ="/orders/removePaymentItemOfSubOrder/{{paymentitem.payment_item_id}}/{{paymentitem.sub_order_id}}/{{model.order_id}}" class="buttonX"> elimina  </a> 
+            <br>
+            <br>
+        {% endfor %}
+
+        <table>
+        {% for item in model.suborderwrapped %}
+            <tr>
+                <td style="background-color:{{item.csscolor}};color: black">
+                <!-- <td> -->
+                    subtotale:  {{item.subtotal}}
+                </td>
+                <td style="background-color:{{item.csscolor}};">
+                <!-- <td> -->
+                    {% if item.Paid %}
+                        pagato
+                        <a href ="/orders/setSubOrderAsNotPaid/{{item.suborderid}}/{{model.orderid}}" class="buttonZ"> ripristina </a>
+                    {% else %}
+                        <a href ="/orders/deleteSubOrder/{{item.suborderid}}/{{model.orderid}}" class="buttonZ"> elimina </a>
+                        <a href ="/orders/setSubOrderAsPaid/{{item.suborderid}}/{{model.orderid}}" class="buttonZ"> pagamento </a>
+                        <a href ="/orders/printReceipt/{{item.suborderid}}/{{model.orderid}}" class="buttonZ"> scontrino </a>
+                        <a href ="/orders/printSubOrderInvoice/{{item.suborderid}}" class="buttonZ"> fattura </a> 
+                    {% endif %}
+
+                </td>
+            </tr>
+        {% endfor %}
+
+        </table>
+
+        <ul id="item-list">
+            <innerp>
+                <br>
+                <br>
+
+                {% if model.residual_payment_due > 0.00 %}
+                    <form method="GET">
+                        Pagamento:    
+                        <select name ="tenderid">
+                            {% for paymentmethod in model.tender_codes%}
+                            <option  value ="{{paymentmethod.index}}"  >{{paymentmethod.name}}</option>
+                            {% endfor %}
+                        </select>
+                        ammontare: <input name= "amount" type = "number" step="0.01" value = "{{model.residual_payment_due}}"/>
+                        <br>
+                        <input type="submit" value="Aggiungi">
+                    </form>
+                {% endif %}
+
+                <br>
+                <br>
+                <br>
+                <a href ="/orders/seeDoneOrders#order{{model.orderid}}" class="buttonX"> ritorna </a>
+                {% if model.residual_payment_due <= 0 %}
+                <a href ="/orders/createEcrReceiptInstructionForSubOrder/{{model.sub_order_id}}/{{model.order_id}}" class="buttonX">conferma</a>
+                {% endif %}
+            </innerp>
+        </ul>
+    </div>
+</body>
+
+</html>

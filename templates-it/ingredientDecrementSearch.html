@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orders System</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link href="/Site.css?v7" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="/jquery-3.1.1.min.js"></script>
+
+  <script type="text/javascript" src="/jquery-ui.js"></script>
+
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+</head>
+<body>
+    <div id="header">
+        <h1>
+            <a href="/">Orders System</a>
+            <br>
+            <br>
+        </h1>
+    </div>
+    <div id="main">
+        <h2>vedi consumi per ingrediente: {{ model.ingredientname}} a partire dalla data: </h2>
+        <br>
+        <form method="POST">
+            <fieldset>
+                <legend>a partire da:</legend>
+                <div class="editor-label">Data (AA/MM/GG)</div>
+                <div class="autocomplete">
+                    <input name="Date" type="text" required="" id="datepicker">
+                </div>
+            </fieldset>
+            <input type="submit" value="Visualizza">
+        </form>
+    </div>
+</body>
+</html>
+
+

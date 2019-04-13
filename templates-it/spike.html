@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+
+<head>
+    <title>Orders system</title>
+    <link href="/Site.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="header">
+        <h1>
+            <a href="/">Orders System</a>
+            <br>
+            <br>
+        </h1>
+    </div>
+    <div id="main">
+        <h1>variazione ingredienti per margherita</h1>
+        <h2>aggiunta ingredienti, seleziona categorie:</h2>
+        <ul id="album-list">
+            <p>
+                <a href="/orders/selectCategoryForAddIngredientInOrderItemEdit/266/19" class="buttonX">liquidi</a>
+            </p>
+            <p>
+                <a href="/orders/selectCategoryForAddIngredientInOrderItemEdit/266/18" class="buttonX">solidi</a>
+            </p>
+        </ul>
+        <form method="POST">
+            <fieldset>
+                <legend>Ingrediente</legend>
+                <div class="editor-label">Nome (selezione)</div>
+                <div class="editor-field">
+                    <select name="IngredientBySelect">
+                        <option value="17">gin</option>
+                        <option value="18">rum</option>
+                        <option value="19">ghiaccio</option>
+                        <option value="20">mozzarella</option>
+                        <option value="21">pomodoro</option>
+                    </select>
+                </div>
+                <div class="editor-label">Quantita&#39;</div>
+                <div class="editor-field">
+                    <select name="Quantity">
+                        <option value="AGGIUNGI POCO">POCO</option>
+                        <option value="AGGIUNGI NORMALE" selected="selected">NORMALE</option>
+                        <option value="AGGIUNGI MOLTO">MOLTO</option>
+                    </select>
+                </div>
+                <div class="editor-label">Nome (testo libero)</div>
+                <!-- <div class="editor-field"> -->
+                <div class="autocomplete" >
+                    <input name="IngredientByText" type="text" required="">
+                </div>
+            </fieldset>
+            <input type="submit" value="Aggiungi">
+        </form>
+        <h2>variazioni esistenti per margherita</h2>
+        <ul id="album-list"></ul>
+        <h2>variazioni possibili permargherita</h2>
+        <ul id="album-list">
+            <table>
+                <tr>
+                    <td>
+                        <a href="/orders/addWithoutIngredientVariation/266/20/138" class="buttonX">SENZA mozzarella</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="/orders/addDiminuishIngredientVariation/266/20" class="buttonX">POCO mozzarella</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="/orders/addMoreIngredientVariation/266/20" class="buttonX">MOLTO mozzarella</a>
+                    </td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <a href="/orders/addWithoutIngredientVariation/266/21/138" class="buttonX">SENZA pomodoro</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="/orders/addDiminuishIngredientVariation/266/21" class="buttonX">POCO pomodoro</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="/orders/addMoreIngredientVariation/266/21" class="buttonX">MOLTO pomodoro</a>
+                    </td>
+                </tr>
+            </table>
+        </ul>
+        <br>
+        <p>
+            <a href="/orders/myOrders#order138" class="buttonX">ritorna</a>
+        </p>
+        <script type="text/javascript" src="/autocompleteEditOrderItemIng.js"></script>
+    </div>
+</body>
+
+</html>

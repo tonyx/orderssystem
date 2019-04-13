@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<html>
+
+<head>
+    <title>Orders system</title>
+    <link href="/Site.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="header">
+        <h1>
+            <a href="/">Orders System</a>
+            <br>
+            <br>
+        </h1>
+    </div>
+    <div id="main">
+        <br>
+        <br>
+        <br>
+        <h2>unione in voci generiche:</h2>
+        <table>
+
+
+        </table>
+
+        <ul id="item-list">
+            <innerp>
+                <br>
+
+                <br>
+
+                <form method="GET">
+                    seleziona:
+                    <select name="piatto">
+                        {%for item in model.coursewrappedlist %}
+                            <option value ="{{item.course_id}}" >{{item.course_name}}</option>
+                        {% endfor %}
+
+
+                    </select>
+                    <br>
+                    <br>
+
+                    <table>
+                        {% for item in model.orderitemdetailswrapped %}
+                        <tr>
+                            <td style="background-color:{{item.csscolor}}; color:black;">
+                                <div>
+                                    <a href = "/orders/editDoneOrderItemFromSubSplitting/{{item.orderitemid}}/{{item.categoryid}}/{{item.orderid}}">
+                                    qtà: {{item.quantity}}  {{item.name}} €: {{item.price}} . Totale: {{item.totalprice}}
+                                    </a>
+                                    <a href = "/orders/editOrderItemVariation/{{item.orderitemid}}/{{model.encodedbackurl}}">ingredienti</a>
+                                    <input type ="checkbox"    name  = "orderitem{{item.orderitemid}}"></label>
+                                    {% if item.isinasuborder != true and item.quantity > 1 %} 
+                                    <a href ="/orders/splitOrderItemInToUnitaryOrderItems/{{item.orderitemid}}" class="buttonX"> espandi  </a>
+                                    {% endif %}
+
+                                    {% if {item.paid} %}
+                                    pagato
+                                    {% endif%}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %} 
+                    </table>
+                    <input type="submit" value="Unisci">
+                </form>
+                <br>
+                <br>
+                <br>
+                <a href ="/orders/seeDoneOrders#order{{model.orderid}}" class="buttonX"> ritorna </a>
+            </innerp>
+        </ul>
+    </div>
+</body>
+
+</html>

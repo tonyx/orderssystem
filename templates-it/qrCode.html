@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<!DOCTYPE html><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html>
+        <head>
+                <title>Orders system</title>
+                <link href="/Site.css" rel="stylesheet" type="text/css">
+        </head>
+        <h1>
+                codice qr per auto-ordinazione tavolo {{model.table}}
+        </h1>
+    <img src="data:image/bmp;base64, {{model.content}} " width="400"/>
+    <script>
+            document.write('<a href="' + document.referrer + '">Go Back</a>');
+    </script>
+</html>

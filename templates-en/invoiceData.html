@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+<html>
+    <head>
+        <title>   Orders system</title>
+        <link href="/Site.css"  rel="stylesheet"  type="text/css">
+    </head>
+
+<body>
+    <div id="header">
+        <h1><a href="/">Orders System</a>
+            <br>
+            <br>
+        </h1>
+    </div>
+
+<script>
+        let idNameMap = new Map ([
+            {% for item in model.idname %}
+                ["{{item.index}}","{{item.name}}"],
+            {% endfor %}
+
+        ]);
+
+        let idDataMap = new Map ([
+            {% for item in model.idname %}
+                ["{{item.index}}","{{item.data}}"],
+            {% endfor %}
+
+        ]);
+
+</script>
+
+        <!-- nextavailablenumber -->
+<form id="usrform" method="POST">
+  <fieldset>
+      <legend>fatturazione</legend>
+      Selezionare azienda (se gia' presente nell'archivio)<br>
+      <select id="selectableCompaniesId" name="CompanyId">
+        {% for item in model.idname %}
+        <option value="{{item.index}}">{{item.name}}</option>
+        {% endfor %}
+        <option value="-1" selected>inserisci nuovo</option>
+        </select>
+        <br>
+        Nome Azienda:<br>
+        <input type = "text" id="companyNameId" name="CompanyName"><br>
+        Intestazione fattura:<br>
+        <textarea rows="4" cols="50" name="Comment" id ="companyDataId"  form="usrform">inserire qui tutti i dati dell'azienda</textarea>
+        <br>
+        <br>
+        Numero fattura:<input type="text" name = "InvoiceNumber" id="invoicenumber" size="4" value={{model.nextavailablenumber}}>
+        <br>
+        <br>
+        Mostra dettaglio voci:<input type="checkbox" name="ShowDetails" >
+        <br>
+        Archivia nome dell'aziena (chiedere consenso):<input type ="checkbox" name="StoreCompany">
+  </fieldset>
+  <input type="submit">
+</form>
+<br>
+
+<script>
+document.getElementById("selectableCompaniesId").addEventListener("change",function(){ 
+        // alert(document.getElementById("selectableCompaniesId").value);
+        document.getElementById("companyNameId").value = idNameMap.get(document.getElementById("selectableCompaniesId").value);
+        document.getElementById("companyDataId").value = idDataMap.get(document.getElementById("selectableCompaniesId").value);
+	});
+</script>
+
+</body>
+</html>

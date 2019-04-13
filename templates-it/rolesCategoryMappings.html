@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div id="header"><h1><a href="/">Orders System</a><br><br></h1></div>
+
+<script>
+
+  let rolescategoriesobservers = new Map([
+          {% for item in model.existingrolestatemapping %}
+          ["{{item.index1}},{{item.index2}}",[{% for list in item.observers %}"{{list.entry}}",{% endfor %}]],
+          {% endfor %}
+       ]);
+
+  let rolescategoriesenablers = new Map([
+          {% for item in model.existingrolestatemapping %}
+          ["{{item.index1}},{{item.index2}}",[{% for list in item.enablers %}"{{list.entry}}",{% endfor %}]],
+          {% endfor %}
+       ]);
+
+
+  let allCheckBoxes = [
+      "EnablerCOLLECTING",
+      "EnablerTOBEWORKED",
+      // "EnablerSTARTEDWORKING",
+      // "EnablerREADYFORDELIVERY",
+      // "EnablerDELIVERED",
+      "EnablerDONE",
+      "ObserverCOLLECTING",
+      "ObserverTOBEWORKED",
+      // "ObserverSTARTEDWORKING",
+      // "ObserverREADYFORDELIVERY",
+      // "ObserverDELIVERED",
+      "ObserverDONE",
+   ];
+
+
+
+
+</script>
+
+<html>
+
+<head>
+  <title>Order System</title>
+  <link href="/Site.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <form method="POST">
+    <fieldset>
+    <legend>ruoli</legend>
+    <select id="rolesids" name="RoleId">
+        {% for item in model.roleidname %}
+        <option value="{{item.index}}" {% if item.index == model.selectroleid %}selected{% endif %}>{{item.name}}</option>
+        {% endfor %}
+    </select>
+    </fieldset>
+
+    <fieldset>
+    <legend>categorie</legend>
+    <select id="categoriesids" name="CategoryId">
+        {% for item in model.categoriesidname %}
+        <option value="{{item.index}}"{% if item.index  == model.selectcategoryid %}selected{% endif %}>{{item.name}}</option>
+        {% endfor %}
+    </select>
+    </fieldset>
+
+
+    <fieldset>
+      <legend>Abilitatore</legend>
+
+        <input type="checkbox" onchange='handleChange(this)' name="EnablerCOLLECTING">Collecting</label>
+        <input type="checkbox" onchange='handleChange(this)' name="EnablerTOBEWORKED">To be worked</label>
+
+
+        <input type="checkbox" onchange='handleChange(this)' name="EnablerDONE">Done</label>
+    </fieldset>
+    <fieldset>
+      <legend>Osservatore</legend>
+        <input type="checkbox" onchange='handleChange(this)' name="ObserverCOLLECTING">Collecting</label>
+        <input type="checkbox" onchange='handleChange(this)' name="ObserverTOBEWORKED">To be worked</label>
+
+
+        <input type="checkbox" onchange='handleChange(this)' name="ObserverDONE">Done</label>
+    </fieldset>
+
+    <input type="submit" value="Aggiorna">
+  </form>
+  <script type="text/javascript" src="/role_cat_enablers_observers.js"></script></div>
+
+  <br/>
+  <br/>
+  <a href="{{model.backurl}}">ritorna</a>
+
+</body>
+
+</html>

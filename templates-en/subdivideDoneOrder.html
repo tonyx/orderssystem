@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<html>
+
+<head>
+    <title>Orders system</title>
+    <link href="/Site.css?v7" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="header">
+        <h1>
+            <a href="/">Orders System</a>
+            <br>
+            <br>
+        </h1>
+    </div>
+    <div id="main">
+        <br>
+        <br>
+        <br>
+        <h2>Table: {{model.table}}</h2>
+        <h2>existing partial receipts:</h2>
+        <table>
+        {% for item in model.suborderwrapped %}
+            <tr>
+                <td style="background-color:{{item.csscolor}};color: black">
+                    subtotal:  {{item.subtotal}}
+                </td>
+                <td style="background-color:{{item.csscolor}};">
+                    {% if item.Paid %}
+                    paid
+
+                    <a href ="/orders/setSubOrderAsNotPaid/{{item.suborderid}}/{{model.orderid}}" class="buttonZ"> ripristina </a>
+                    {% else %}
+                    <a href ="/orders/deleteSubOrder/{{item.suborderid}}/{{model.orderid}}" class="buttonZ"> elimina </a>
+                    <a href ="/orders/subOrderPaymentItems/{{item.suborderid}}/{{model.orderid}}" class="buttonZ"> pagamento </a>
+                    {% endif %}
+
+
+                </td>
+            </tr>
+        {% endfor %}
+
+        </table>
+
+        <ul id="item-list">
+            <innerp>
+                <br>
+                <br>
+                <form method="GET">
+
+                    <table>
+                        {% for item in model.orderitemdetailswrapped %}
+                        <tr>
+
+                            <td style="background-color:{{item.csscolor}}; color:black;">
+
+                                <div>
+                                    <a href = "/orders/editDoneOrderItemFromSubSplitting/{{item.orderitemid}}/{{item.categoryid}}/{{item.orderid}}">
+                                    qtà: {{item.quantity}}  {{item.name}} €: {{item.price}} . Total: {{item.totalprice}}
+                                    </a>
+                                    <a href = "/orders/editOrderItemVariation/{{item.orderitemid}}/{{model.encodedbackurl}}">ingredients</a>
+                                    <input type ="checkbox"  {% if item.isinasuborder %}  disabled="disabled"  {% endif %}   name  = "orderitem{{item.orderitemid}}"></label>
+                                    {% if item.isinasuborder != true and item.quantity > 1 %} 
+                                    <a href ="/orders/splitOrderItemInToUnitaryOrderItems/{{item.orderitemid}}" class="buttonX"> expand  </a>
+                                    {% endif %}
+
+                                    {% if {item.paid} %}
+                                    paid
+                                    {% endif%}
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %} 
+                    </table>
+                    <input type="submit" value="New subdivision">
+                </form>
+                <br>
+                <br>
+                <br>
+                <a href ="/orders/seeDoneOrders#order{{model.orderid}}" class="buttonX"> back </a>
+            </innerp>
+        </ul>
+    </div>
+</body>
+
+</html>

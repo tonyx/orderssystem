@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+
+<div id="header"><h1><a href="/">Orders System</a><br><br></h1></div>
+
+<h2>{{model.printername}}</h2>
+<script>
+
+  let printerforstateenabled = [
+          {% for item in model.printerforstateenabled %}
+          "{{item.name}}",
+          {% endfor %}
+       ];
+
+  let enabledStatesforcategories = new Map([
+    {% for item in model.enabledstatesforcategories %}
+    ["{{item.index}}",[{% for statename in item.names  %}"{{statename}}", {% endfor %}  ]],
+    {% endfor %}
+  ]);
+
+
+  let rolescategoriesobservers = new Map([
+          {% for item in model.existingrolestatemapping %}
+          ["{{item.index1}},{{item.index2}}",[{% for list in item.observers %}"{{list.entry}}",{% endfor %}]],
+          {% endfor %}
+       ]);
+
+  let rolescategoriesenablers = new Map([
+          {% for item in model.existingrolestatemapping %}
+          ["{{item.index1}},{{item.index2}}",[{% for list in item.enablers %}"{{list.entry}}",{% endfor %}]],
+          {% endfor %}
+       ]);
+
+
+  let allCheckBoxesNames = [
+      "COLLECTING",
+      "TOBEWORKED",
+      "STARTEDWORKING",
+      "READYFORDELIVERY",
+      "DELIVERED",
+      "DONE",
+   ];
+
+
+</script>
+
+<html>
+
+<head>
+  <title>Order System</title>
+  <link href="/Site.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <form method="POST">
+
+    <fieldset>
+    <legend>courses categories</legend>
+    <select name="CategoryId">
+        {% for item in model.coursecategories %}
+        <option value="{{item.index}}" {% if item.index == model.selectedcategory %}selected{% endif %}>{{item.name}}
+        </option>
+        {% endfor %}
+    </select>
+    </fieldset>
+
+
+    <fieldset>
+      <legend>Stati</legend>
+        <input type="checkbox"  name="COLLECTING" disabled>Collecting</label>
+        <input type="checkbox"  name="TOBEWORKED" >To be worked</label>
+        <input type="checkbox"  name="STARTEDWORKING" disabled>Started working</label>
+        <input type="checkbox"  name="READYFORDELIVERY" disabled>Ready for Delivery</label>
+        <input type="checkbox"  name="DELIVERED"disabled>Delivered</label>
+        <input type="checkbox"  name="DONE" disabled>Done</label>
+    </fieldset>
+
+
+    <fieldset>
+      <legend>stampa dei conti</legend>
+      <input type="checkbox" name = "PRINTINVOICE" {% if model.isenabledforprintinginvoices %} checked {% endif %}>invoice</input>
+      <input type="checkbox" name = "PRINTRECEIPT" {% if model.isenabledforprintingreceipts %} checked  {% endif %}> receipt</input>
+    </fieldset>
+
+    <input type="submit" value="Update">
+
+  </form>
+
+    <br>
+    <button onclick="confirmRemovePrinter()" class="buttonX">     remove printer!  </button>
+    <br>
+
+
+  <script>
+    function confirmRemovePrinter() {
+        var confirmed = confirm("Confirm remove printer!");
+        if (confirmed) window.location = "/admin/removePrinter/{{model/printerid}}"
+    }
+  </script>
+
+
+  <script type="text/javascript" src="/printer_state_category.js?px"></script></div>
+
+  <br/>
+  <br/>
+
+  <a href="{{model.backurl}}">ritorna</a>
+
+</body>
+
+</html>
