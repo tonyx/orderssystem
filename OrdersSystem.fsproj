@@ -197,9 +197,6 @@
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="home-showcase.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="script_options.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
