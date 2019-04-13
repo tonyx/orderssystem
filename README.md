@@ -9,6 +9,23 @@ This project is an implementation of an orders system using F#.
 Typical use is restaurants collecting orders, printing orders where needed, and deliverying the fiscal receipts.
 
 
+## main features:
+1) manage ingredients,
+2) manage courses,
+3) manage ingredients of the courses,
+4) collect orders,
+5) define users roles,
+6) manage variations of orders items (in term of add ons or drop off of ingredients)
+7) manage price variations related to order items variations
+8) print orders by associating printer for course categories
+9) display order items 
+10) manage payment by eventually subdividing the bill
+11) connect to fiscal cash drawer (by using an external software).
+
+
+
+
+
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
