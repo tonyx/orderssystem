@@ -118,6 +118,10 @@ This project is licensed under the GPL License  (https://www.gnu.org/licenses/gp
 
 To print, a plain text file is sent to the printer. Special formatting (different sizes and stiles) will be one of the next features.
 
+## Blog: 
+
+https://tonyxzt.blogspot.com/2019/04/a-free-orders-system-in-f-part-1.html (part 1)
+
 
 ## Donations:
 
