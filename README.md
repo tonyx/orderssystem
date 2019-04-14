@@ -1,26 +1,25 @@
 # Orders System
 
-  A tool for processing restaurant orders from the collection to the payment
+  A tool for processing restaurant orders from the collection to the payment, emitting valid fiscal receipt.
 
 
 ## Getting Started
 
-This project is an implementation of an orders system using F#.
 Typical use is restaurants collecting orders, printing orders where needed, and deliverying the fiscal receipts.
 
 
 ## main features:
-1) manage ingredients,
-2) manage courses,
-3) manage ingredients of the courses,
-4) collect orders,
-5) define users roles,
-6) manage variations of orders items (in term of add ons or drop off of ingredients)
-7) manage price variations related to order items variations
-8) print orders by associating printer for course categories
-9) display order items 
-10) manage payment by eventually subdividing the bill
-11) connect to fiscal cash drawer (by using an external software).
+1) managing ingredients, and categories of ingredients
+2) managing courses, and categories
+3) managing ingredients composing the courses (receipts)
+4) collecting orders,
+5) defining users roles,
+6) managing variations of orders items (in term of add ons or drop off of ingredients)
+7) managing price variations related to order items variations
+8) printing orders by associating printer for course categories
+9) displayng order items 
+10) managing payment by eventually subdividing the bill
+11) print a fiscal cash drawer (by using an external software).
 
 
 
@@ -48,7 +47,7 @@ git clone git@github.com:tonyx/orderssystem.git
 ```
 nuget restore -SolutionDirectory .
 ```
-3) download separately the Npgsql-2.2.1-net45, from https://www.nuget.org/packages/Npgsql/2.2.1. In case of troubles, you may want to
+3) install separately the Npgsql-2.2.1-net45, from https://www.nuget.org/packages/Npgsql/2.2.1. In case of troubles, you may want to
 download the nupkg and then install from the local directory, by using the command 
 ```
 nuget install Npgsql -version 2.2.1 -Source %cd% -OutputDirectory packages 
@@ -71,11 +70,11 @@ create database orderssystem
 ```
 7) in pgsql, grant all priviledges to suave user
 ```
-grant all privileges on database mydb to suave
+grant all privileges on database orderssystem to suave
 ```
 9) load the orders_system.sql schema and data to orderssystem database, you may run the psql again form the command prompt:
 ```
-psql -d ordersystem -f ordersystem.sql
+psql -d ordersystem -f orders_system.sql
 ```
 10) build the project by msbuild
 
@@ -84,12 +83,12 @@ psql -d ordersystem -f ordersystem.sql
 
 ## Connecting devices
 
-You can use any printer to print order. A configuration tool may associate categories to a specific division. The App.config contains the full path of a lpr print command. Tested on Mac os X. There is a lpr command available also in Windows machines, with the same syntax, so I don't see any problem on wndows machines.
-For fiscal receipt a special file "ecr.txt" is generatd in a format compatible with a proprietary software WinEcrCom 1.9.20 from Ditron s.r.l. (which is distributed together with some fiscal devices).
-Such software will look into the dir and print to a P.O.S. fiscal cash drawer.
-I succesfully tested it with a Sico Athom.
+You can use any printer to print order. A configuration tool in the program allow to associate a category of coureses (i.e. pizza, drink, etc...) to a specific division (pizzeria, bar, ...). The App.config contains the full path of a lpr print command. Tested on Mac os X. 
+For fiscal receipt a special, file "ecr.txt" is generatd in a format compatible with a proprietary software WinEcrCom 1.9.20 from Ditron s.r.l. (which is distributed together with some fiscal devices).
+Such software will look into the dir and print to a P.O.S. fiscal cash drawer when finding the ecr.txt file.
+I succesfully tested it with a Sico Athom cash drawer.
 
-I'll try to add soon a standard non proprietary P.O.S. drivers.
+I'll try to estend it by adopting  a standard non proprietary P.O.S. drivers/library.
 
 
 
