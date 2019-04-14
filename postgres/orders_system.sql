@@ -74,10 +74,12 @@ ALTER SEQUENCE public.archivedorderslog_id_seq OWNED BY public.archivedorderslog
 CREATE TABLE public.coursecategories (
     categoryid integer NOT NULL,
     name character varying(50) NOT NULL,
-    visibile boolean DEFAULT true
+    visibile boolean DEFAULT true,
+    abstract boolean NOT NULL
 );
 
 
+ALTER TABLE public.coursecategories OWNER TO "Tonyx";
 
 --
 -- Name: courses; Type: TABLE; Schema: public; Owner: Tonyx
@@ -93,6 +95,7 @@ CREATE TABLE public.courses (
 );
 
 
+ALTER TABLE public.courses OWNER TO "Tonyx";
 
 --
 -- Name: coursedetails2; Type: VIEW; Schema: public; Owner: Tonyx
@@ -111,6 +114,7 @@ CREATE VIEW public.coursedetails2 AS
   ORDER BY a.courseid;
 
 
+ALTER TABLE public.coursedetails2 OWNER TO "Tonyx";
 
 --
 -- Name: courses_categoryid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -124,6 +128,7 @@ CREATE SEQUENCE public.courses_categoryid_seq
     CACHE 1;
 
 
+ALTER TABLE public.courses_categoryid_seq OWNER TO "Tonyx";
 
 --
 -- Name: courses_categoryid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -144,6 +149,7 @@ CREATE SEQUENCE public.courses_courseid_seq
     CACHE 1;
 
 
+ALTER TABLE public.courses_courseid_seq OWNER TO "Tonyx";
 
 --
 -- Name: courses_courseid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -151,6 +157,33 @@ CREATE SEQUENCE public.courses_courseid_seq
 
 ALTER SEQUENCE public.courses_courseid_seq OWNED BY public.courses.courseid;
 
+
+--
+-- Name: customerdata_id_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
+--
+
+CREATE SEQUENCE public.customerdata_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.customerdata_id_seq OWNER TO "Tonyx";
+
+--
+-- Name: customerdata; Type: TABLE; Schema: public; Owner: Tonyx
+--
+
+CREATE TABLE public.customerdata (
+    customerdataid integer DEFAULT nextval('public.customerdata_id_seq'::regclass) NOT NULL,
+    data character varying(4000) NOT NULL,
+    name character varying(300) NOT NULL
+);
+
+
+ALTER TABLE public.customerdata OWNER TO "Tonyx";
 
 --
 -- Name: defaulwaiteractionablestates_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -164,6 +197,7 @@ CREATE SEQUENCE public.defaulwaiteractionablestates_seq
     CACHE 1;
 
 
+ALTER TABLE public.defaulwaiteractionablestates_seq OWNER TO "Tonyx";
 
 --
 -- Name: defaultactionablestates; Type: TABLE; Schema: public; Owner: Tonyx
@@ -175,6 +209,7 @@ CREATE TABLE public.defaultactionablestates (
 );
 
 
+ALTER TABLE public.defaultactionablestates OWNER TO "Tonyx";
 
 --
 -- Name: enablers_elablersid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -188,6 +223,7 @@ CREATE SEQUENCE public.enablers_elablersid_seq
     CACHE 1;
 
 
+ALTER TABLE public.enablers_elablersid_seq OWNER TO "Tonyx";
 
 --
 -- Name: enablers; Type: TABLE; Schema: public; Owner: Tonyx
@@ -201,6 +237,7 @@ CREATE TABLE public.enablers (
 );
 
 
+ALTER TABLE public.enablers OWNER TO "Tonyx";
 
 --
 -- Name: roles; Type: TABLE; Schema: public; Owner: Tonyx
@@ -213,6 +250,7 @@ CREATE TABLE public.roles (
 );
 
 
+ALTER TABLE public.roles OWNER TO "Tonyx";
 
 --
 -- Name: states_stateid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -226,6 +264,7 @@ CREATE SEQUENCE public.states_stateid_seq
     CACHE 1;
 
 
+ALTER TABLE public.states_stateid_seq OWNER TO "Tonyx";
 
 --
 -- Name: states; Type: TABLE; Schema: public; Owner: Tonyx
@@ -242,6 +281,7 @@ CREATE TABLE public.states (
 );
 
 
+ALTER TABLE public.states OWNER TO "Tonyx";
 
 --
 -- Name: enablersrolestatuscategories; Type: VIEW; Schema: public; Owner: Tonyx
@@ -258,6 +298,7 @@ CREATE VIEW public.enablersrolestatuscategories AS
      JOIN public.states e ON ((a.stateid = e.stateid)));
 
 
+ALTER TABLE public.enablersrolestatuscategories OWNER TO "Tonyx";
 
 --
 -- Name: incredientdecrementid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -271,6 +312,7 @@ CREATE SEQUENCE public.incredientdecrementid_seq
     CACHE 1;
 
 
+ALTER TABLE public.incredientdecrementid_seq OWNER TO "Tonyx";
 
 --
 -- Name: ingredient; Type: TABLE; Schema: public; Owner: Tonyx
@@ -290,6 +332,7 @@ CREATE TABLE public.ingredient (
 );
 
 
+ALTER TABLE public.ingredient OWNER TO "Tonyx";
 
 --
 -- Name: ingredientcategory; Type: TABLE; Schema: public; Owner: Tonyx
@@ -303,6 +346,7 @@ CREATE TABLE public.ingredientcategory (
 );
 
 
+ALTER TABLE public.ingredientcategory OWNER TO "Tonyx";
 
 --
 -- Name: ingredient_categoryid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -316,6 +360,7 @@ CREATE SEQUENCE public.ingredient_categoryid_seq
     CACHE 1;
 
 
+ALTER TABLE public.ingredient_categoryid_seq OWNER TO "Tonyx";
 
 --
 -- Name: ingredient_categoryid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -336,6 +381,7 @@ CREATE TABLE public.ingredientcourse (
 );
 
 
+ALTER TABLE public.ingredientcourse OWNER TO "Tonyx";
 
 --
 -- Name: ingredientcourseid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -349,6 +395,7 @@ CREATE SEQUENCE public.ingredientcourseid_seq
     CACHE 1;
 
 
+ALTER TABLE public.ingredientcourseid_seq OWNER TO "Tonyx";
 
 --
 -- Name: ingredientcourseid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -373,6 +420,7 @@ CREATE TABLE public.ingredientdecrement (
 );
 
 
+ALTER TABLE public.ingredientdecrement OWNER TO "Tonyx";
 
 --
 -- Name: orderitems; Type: TABLE; Schema: public; Owner: Tonyx
@@ -389,7 +437,7 @@ CREATE TABLE public.orderitems (
     archived boolean,
     startingtime timestamp without time zone NOT NULL,
     closingtime timestamp without time zone,
-    ordergroupid integer,
+    ordergroupid integer NOT NULL,
     hasbeenrejected boolean NOT NULL,
     suborderid integer,
     isinsasuborder boolean DEFAULT false,
@@ -397,6 +445,7 @@ CREATE TABLE public.orderitems (
 );
 
 
+ALTER TABLE public.orderitems OWNER TO "Tonyx";
 
 --
 -- Name: ingredientdecrementview; Type: VIEW; Schema: public; Owner: Tonyx
@@ -428,6 +477,7 @@ CREATE VIEW public.ingredientdecrementview AS
      LEFT JOIN public.ingredientcourse e ON (((e.ingredientid = a.ingredientid) AND (e.courseid = c.courseid))));
 
 
+ALTER TABLE public.ingredientdecrementview OWNER TO "Tonyx";
 
 --
 -- Name: ingredientdetails; Type: VIEW; Schema: public; Owner: Tonyx
@@ -444,6 +494,7 @@ CREATE VIEW public.ingredientdetails AS
      JOIN public.ingredientcategory d ON ((b.ingredientcategoryid = d.ingredientcategoryid)));
 
 
+ALTER TABLE public.ingredientdetails OWNER TO "Tonyx";
 
 --
 -- Name: ingredientid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -457,6 +508,7 @@ CREATE SEQUENCE public.ingredientid_seq
     CACHE 1;
 
 
+ALTER TABLE public.ingredientid_seq OWNER TO "Tonyx";
 
 --
 -- Name: ingredientid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -477,6 +529,7 @@ CREATE SEQUENCE public.ingredientincrementid_seq
     CACHE 1;
 
 
+ALTER TABLE public.ingredientincrementid_seq OWNER TO "Tonyx";
 
 --
 -- Name: ingredientincrement; Type: TABLE; Schema: public; Owner: Tonyx
@@ -493,6 +546,7 @@ CREATE TABLE public.ingredientincrement (
 );
 
 
+ALTER TABLE public.ingredientincrement OWNER TO "Tonyx";
 
 --
 -- Name: ingredientofcourses; Type: VIEW; Schema: public; Owner: Tonyx
@@ -518,6 +572,7 @@ CREATE VIEW public.ingredientofcourses AS
      JOIN public.ingredientcategory d ON ((b.ingredientcategoryid = d.ingredientcategoryid)));
 
 
+ALTER TABLE public.ingredientofcourses OWNER TO "Tonyx";
 
 --
 -- Name: ingredientpriceid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -531,6 +586,7 @@ CREATE SEQUENCE public.ingredientpriceid_seq
     CACHE 1;
 
 
+ALTER TABLE public.ingredientpriceid_seq OWNER TO "Tonyx";
 
 --
 -- Name: ingredientprice; Type: TABLE; Schema: public; Owner: Tonyx
@@ -547,6 +603,7 @@ CREATE TABLE public.ingredientprice (
 );
 
 
+ALTER TABLE public.ingredientprice OWNER TO "Tonyx";
 
 --
 -- Name: ingredientpricedetails; Type: VIEW; Schema: public; Owner: Tonyx
@@ -566,12 +623,13 @@ CREATE VIEW public.ingredientpricedetails AS
   ORDER BY b.name;
 
 
+ALTER TABLE public.ingredientpricedetails OWNER TO "Tonyx";
 
 --
--- Name: observers_observerid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
+-- Name: invoicesid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
 --
 
-CREATE SEQUENCE public.observers_observerid_seq
+CREATE SEQUENCE public.invoicesid_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -579,48 +637,24 @@ CREATE SEQUENCE public.observers_observerid_seq
     CACHE 1;
 
 
+ALTER TABLE public.invoicesid_seq OWNER TO "Tonyx";
 
 --
--- Name: observers; Type: TABLE; Schema: public; Owner: Tonyx
+-- Name: invoices; Type: TABLE; Schema: public; Owner: Tonyx
 --
 
-CREATE TABLE public.observers (
-    observersid integer DEFAULT nextval('public.observers_observerid_seq'::regclass) NOT NULL,
-    stateid integer NOT NULL,
-    roleid integer NOT NULL,
-    categoryid integer NOT NULL
+CREATE TABLE public.invoices (
+    invoicesid integer DEFAULT nextval('public.invoicesid_seq'::regclass) NOT NULL,
+    data character varying(4000) NOT NULL,
+    invoicenumber integer NOT NULL,
+    customerdataid integer,
+    date timestamp without time zone NOT NULL,
+    suborderid integer,
+    orderid integer
 );
 
 
-
---
--- Name: observers_observersid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
---
-
-CREATE SEQUENCE public.observers_observersid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-
---
--- Name: observersrolestatuscategories; Type: VIEW; Schema: public; Owner: Tonyx
---
-
-CREATE VIEW public.observersrolestatuscategories AS
- SELECT a.observersid,
-    c.rolename,
-    d.name AS categoryname,
-    e.statusname
-   FROM (((public.observers a
-     JOIN public.roles c ON ((a.roleid = c.roleid)))
-     JOIN public.coursecategories d ON ((a.categoryid = d.categoryid)))
-     JOIN public.states e ON ((a.stateid = e.stateid)));
-
-
+ALTER TABLE public.invoices OWNER TO "Tonyx";
 
 --
 -- Name: orders; Type: TABLE; Schema: public; Owner: Tonyx
@@ -646,6 +680,7 @@ CREATE TABLE public.orders (
 );
 
 
+ALTER TABLE public.orders OWNER TO "Tonyx";
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: Tonyx
@@ -668,6 +703,123 @@ CREATE TABLE public.users (
 );
 
 
+ALTER TABLE public.users OWNER TO "Tonyx";
+
+--
+-- Name: nonarchivedorderdetails; Type: VIEW; Schema: public; Owner: Tonyx
+--
+
+CREATE VIEW public.nonarchivedorderdetails AS
+ SELECT a.orderid,
+    a."table",
+    a.person,
+    a.ongoing,
+    a.userid,
+    a.startingtime,
+    a.closingtime,
+    a.voided,
+    a.total,
+    a.adjustedtotal,
+    a.archived,
+    b.username,
+    a.forqruserarchived
+   FROM (public.orders a
+     JOIN public.users b ON ((a.userid = b.userid)))
+  WHERE ((a.archived = false) AND (a.voided = false) AND (( SELECT count(*) AS count
+           FROM (public.orderitems c
+             JOIN public.states d ON ((c.stateid = d.stateid)))
+          WHERE ((c.orderid = a.orderid) AND (NOT d.isinitial))) > 0))
+  ORDER BY a.startingtime;
+
+
+ALTER TABLE public.nonarchivedorderdetails OWNER TO "Tonyx";
+
+--
+-- Name: nonemptyorderdetails; Type: VIEW; Schema: public; Owner: Tonyx
+--
+
+CREATE VIEW public.nonemptyorderdetails AS
+ SELECT a.orderid,
+    a."table",
+    a.person,
+    a.ongoing,
+    a.userid,
+    a.startingtime,
+    a.closingtime,
+    a.voided,
+    a.total,
+    a.adjustedtotal,
+    a.archived,
+    b.username,
+    a.forqruserarchived
+   FROM (public.orders a
+     JOIN public.users b ON ((a.userid = b.userid)))
+  WHERE (( SELECT count(*) AS count
+           FROM public.orderitems c
+          WHERE (c.orderid = a.orderid)) > 0)
+  ORDER BY a.startingtime;
+
+
+ALTER TABLE public.nonemptyorderdetails OWNER TO "Tonyx";
+
+--
+-- Name: observers_observerid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
+--
+
+CREATE SEQUENCE public.observers_observerid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.observers_observerid_seq OWNER TO "Tonyx";
+
+--
+-- Name: observers; Type: TABLE; Schema: public; Owner: Tonyx
+--
+
+CREATE TABLE public.observers (
+    observersid integer DEFAULT nextval('public.observers_observerid_seq'::regclass) NOT NULL,
+    stateid integer NOT NULL,
+    roleid integer NOT NULL,
+    categoryid integer NOT NULL
+);
+
+
+ALTER TABLE public.observers OWNER TO "Tonyx";
+
+--
+-- Name: observers_observersid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
+--
+
+CREATE SEQUENCE public.observers_observersid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.observers_observersid_seq OWNER TO "Tonyx";
+
+--
+-- Name: observersrolestatuscategories; Type: VIEW; Schema: public; Owner: Tonyx
+--
+
+CREATE VIEW public.observersrolestatuscategories AS
+ SELECT a.observersid,
+    c.rolename,
+    d.name AS categoryname,
+    e.statusname
+   FROM (((public.observers a
+     JOIN public.roles c ON ((a.roleid = c.roleid)))
+     JOIN public.coursecategories d ON ((a.categoryid = d.categoryid)))
+     JOIN public.states e ON ((a.stateid = e.stateid)));
+
+
+ALTER TABLE public.observersrolestatuscategories OWNER TO "Tonyx";
 
 --
 -- Name: orderdetails; Type: VIEW; Schema: public; Owner: Tonyx
@@ -692,6 +844,7 @@ CREATE VIEW public.orderdetails AS
   ORDER BY a.startingtime;
 
 
+ALTER TABLE public.orderdetails OWNER TO "Tonyx";
 
 --
 -- Name: orderoutgroup_id_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -705,6 +858,7 @@ CREATE SEQUENCE public.orderoutgroup_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.orderoutgroup_id_seq OWNER TO "Tonyx";
 
 --
 -- Name: orderoutgroup; Type: TABLE; Schema: public; Owner: Tonyx
@@ -718,6 +872,7 @@ CREATE TABLE public.orderoutgroup (
 );
 
 
+ALTER TABLE public.orderoutgroup OWNER TO "Tonyx";
 
 --
 -- Name: suborderid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -731,6 +886,7 @@ CREATE SEQUENCE public.suborderid_seq
     CACHE 1;
 
 
+ALTER TABLE public.suborderid_seq OWNER TO "Tonyx";
 
 --
 -- Name: suborder; Type: TABLE; Schema: public; Owner: Tonyx
@@ -739,13 +895,17 @@ CREATE SEQUENCE public.suborderid_seq
 CREATE TABLE public.suborder (
     suborderid integer DEFAULT nextval('public.suborderid_seq'::regclass) NOT NULL,
     orderid integer NOT NULL,
-    subtotal numeric NOT NULL,
+    subtotal numeric(10,2) NOT NULL,
     comment character varying(30),
     payed boolean NOT NULL,
-    creationtime timestamp without time zone NOT NULL
+    creationtime timestamp without time zone NOT NULL,
+    tendercodesid integer,
+    subtotaladjustment numeric(10,2) DEFAULT 0,
+    subtotalpercentadjustment numeric(10,2) DEFAULT 0
 );
 
 
+ALTER TABLE public.suborder OWNER TO "Tonyx";
 
 --
 -- Name: orderitemdetails; Type: VIEW; Schema: public; Owner: Tonyx
@@ -774,7 +934,7 @@ CREATE VIEW public.orderitemdetails AS
     a.isinsasuborder,
     g.groupidentifier,
     g.ordergroupid,
-    f.payed
+    (COALESCE(f.payed, false) OR d.archived) AS payed
    FROM ((((((public.orderitems a
      JOIN public.courses b ON ((a.courseid = b.courseid)))
      JOIN public.states c ON ((a.stateid = c.stateid)))
@@ -784,6 +944,7 @@ CREATE VIEW public.orderitemdetails AS
      LEFT JOIN public.suborder f ON ((a.suborderid = f.suborderid)));
 
 
+ALTER TABLE public.orderitemdetails OWNER TO "Tonyx";
 
 --
 -- Name: orderitems_orderitemid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -797,6 +958,7 @@ CREATE SEQUENCE public.orderitems_orderitemid_seq
     CACHE 1;
 
 
+ALTER TABLE public.orderitems_orderitemid_seq OWNER TO "Tonyx";
 
 --
 -- Name: orderitems_orderitemid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -817,6 +979,7 @@ CREATE TABLE public.orderitemstates (
 );
 
 
+ALTER TABLE public.orderitemstates OWNER TO "Tonyx";
 
 --
 -- Name: orderitemstates_orderitemstates_id_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -830,6 +993,7 @@ CREATE SEQUENCE public.orderitemstates_orderitemstates_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.orderitemstates_orderitemstates_id_seq OWNER TO "Tonyx";
 
 --
 -- Name: orderitemstates_orderitemstates_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -853,6 +1017,7 @@ CREATE VIEW public.orderoutgroupdetails AS
      JOIN public.orders b ON ((a.orderid = b.orderid)));
 
 
+ALTER TABLE public.orderoutgroupdetails OWNER TO "Tonyx";
 
 --
 -- Name: orders_orderid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -866,6 +1031,7 @@ CREATE SEQUENCE public.orders_orderid_seq
     CACHE 1;
 
 
+ALTER TABLE public.orders_orderid_seq OWNER TO "Tonyx";
 
 --
 -- Name: orders_orderid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -873,6 +1039,80 @@ CREATE SEQUENCE public.orders_orderid_seq
 
 ALTER SEQUENCE public.orders_orderid_seq OWNED BY public.orders.orderid;
 
+
+--
+-- Name: paymentid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
+--
+
+CREATE SEQUENCE public.paymentid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.paymentid_seq OWNER TO "Tonyx";
+
+--
+-- Name: paymentitem; Type: TABLE; Schema: public; Owner: Tonyx
+--
+
+CREATE TABLE public.paymentitem (
+    paymentid integer DEFAULT nextval('public.paymentid_seq'::regclass) NOT NULL,
+    suborderid integer,
+    orderid integer,
+    tendercodesid integer NOT NULL,
+    amount numeric(10,2) NOT NULL
+);
+
+
+ALTER TABLE public.paymentitem OWNER TO "Tonyx";
+
+--
+-- Name: tendercodesid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
+--
+
+CREATE SEQUENCE public.tendercodesid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tendercodesid_seq OWNER TO "Tonyx";
+
+--
+-- Name: tendercodes; Type: TABLE; Schema: public; Owner: Tonyx
+--
+
+CREATE TABLE public.tendercodes (
+    tendercodesid integer DEFAULT nextval('public.tendercodesid_seq'::regclass) NOT NULL,
+    tendercode integer NOT NULL,
+    tendername character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.tendercodes OWNER TO "Tonyx";
+
+--
+-- Name: paymentitemdetails; Type: VIEW; Schema: public; Owner: Tonyx
+--
+
+CREATE VIEW public.paymentitemdetails AS
+ SELECT a.paymentid,
+    a.suborderid,
+    a.orderid,
+    a.tendercodesid,
+    a.amount,
+    b.tendername,
+    b.tendercode AS tendercodeidentifier
+   FROM (public.paymentitem a
+     JOIN public.tendercodes b ON ((a.tendercodesid = b.tendercodesid)));
+
+
+ALTER TABLE public.paymentitemdetails OWNER TO "Tonyx";
 
 --
 -- Name: printerforcategory_id_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -886,6 +1126,7 @@ CREATE SEQUENCE public.printerforcategory_id_seq
     CACHE 1;
 
 
+ALTER TABLE public.printerforcategory_id_seq OWNER TO "Tonyx";
 
 --
 -- Name: printerforcategory; Type: TABLE; Schema: public; Owner: Tonyx
@@ -925,6 +1166,7 @@ CREATE TABLE public.printers (
 );
 
 
+ALTER TABLE public.printers OWNER TO "Tonyx";
 
 --
 -- Name: printerforcategorydetail; Type: VIEW; Schema: public; Owner: Tonyx
@@ -944,6 +1186,7 @@ CREATE VIEW public.printerforcategorydetail AS
      JOIN public.states e ON ((a.stateid = e.stateid)));
 
 
+ALTER TABLE public.printerforcategorydetail OWNER TO "Tonyx";
 
 --
 -- Name: printerforreceiptandinvoice_id_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -1112,7 +1355,8 @@ CREATE VIEW public.usersview AS
     a.istemporary,
     a.creationtime,
     a.consumed,
-    a.canmanagecourses
+    a.canmanagecourses,
+    a.canmanageallorders
    FROM (public.users a
      JOIN public.roles b ON ((a.role = b.roleid)))
   ORDER BY a.username;
@@ -1340,7 +1584,7 @@ ALTER TABLE ONLY public.voidedorderslogbuffer ALTER COLUMN voidedorderslogbuffer
 -- Name: archivedorderslog_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.archivedorderslog_id_seq', 98, true);
+SELECT pg_catalog.setval('public.archivedorderslog_id_seq', 282, true);
 
 
 --
@@ -1348,19 +1592,6 @@ SELECT pg_catalog.setval('public.archivedorderslog_id_seq', 98, true);
 --
 
 COPY public.archivedorderslogbuffer (archivedlogbufferid, archivedtime, orderid) FROM stdin;
-82	2018-10-02 13:44:40.296432	450
-83	2018-10-02 13:44:41.577363	448
-86	2018-10-02 13:52:31.435716	447
-89	2018-10-03 10:59:07.878491	449
-90	2018-10-03 10:59:09.759008	453
-91	2018-10-03 10:59:11.406777	454
-92	2018-10-03 18:27:13.423577	455
-93	2018-10-03 18:39:07.077773	456
-94	2018-10-03 20:06:06.214199	457
-95	2018-10-03 20:58:01.481195	458
-96	2018-10-03 20:58:03.51703	459
-97	2018-10-03 22:57:11.665505	460
-98	2018-10-07 14:37:42.719994	462
 \.
 
 
@@ -1368,12 +1599,7 @@ COPY public.archivedorderslogbuffer (archivedlogbufferid, archivedtime, orderid)
 -- Data for Name: coursecategories; Type: TABLE DATA; Schema: public; Owner: Tonyx
 --
 
-COPY public.coursecategories (categoryid, name, visibile) FROM stdin;
-57	panini	t
-58	drink	t
-59	primi piatti	t
-60	dessert	t
-61	secondi	t
+COPY public.coursecategories (categoryid, name, visibile, abstract) FROM stdin;
 \.
 
 
@@ -1382,11 +1608,6 @@ COPY public.coursecategories (categoryid, name, visibile) FROM stdin;
 --
 
 COPY public.courses (courseid, name, description, price, categoryid, visibility) FROM stdin;
-401	hamburger completo		5.00	57	t
-402	coca cola		3.00	58	t
-403	maccheroni con pomodoro		8.00	59	t
-404	ice cream		4.00	60	t
-405	bistecca		8.00	61	t
 \.
 
 
@@ -1394,14 +1615,29 @@ COPY public.courses (courseid, name, description, price, categoryid, visibility)
 -- Name: courses_categoryid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.courses_categoryid_seq', 61, true);
+SELECT pg_catalog.setval('public.courses_categoryid_seq', 69, true);
 
 
 --
 -- Name: courses_courseid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.courses_courseid_seq', 405, true);
+SELECT pg_catalog.setval('public.courses_courseid_seq', 535, true);
+
+
+--
+-- Data for Name: customerdata; Type: TABLE DATA; Schema: public; Owner: Tonyx
+--
+
+COPY public.customerdata (customerdataid, data, name) FROM stdin;
+\.
+
+
+--
+-- Name: customerdata_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
+--
+
+SELECT pg_catalog.setval('public.customerdata_id_seq', 12, true);
 
 
 --
@@ -1409,7 +1645,6 @@ SELECT pg_catalog.setval('public.courses_courseid_seq', 405, true);
 --
 
 COPY public.defaultactionablestates (defaultactionablestatesid, stateid) FROM stdin;
-28	1
 \.
 
 
@@ -1417,7 +1652,7 @@ COPY public.defaultactionablestates (defaultactionablestatesid, stateid) FROM st
 -- Name: defaulwaiteractionablestates_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.defaulwaiteractionablestates_seq', 29, true);
+SELECT pg_catalog.setval('public.defaulwaiteractionablestates_seq', 30, true);
 
 
 --
@@ -1425,7 +1660,6 @@ SELECT pg_catalog.setval('public.defaulwaiteractionablestates_seq', 29, true);
 --
 
 COPY public.enablers (enablersid, roleid, stateid, categoryid) FROM stdin;
-188	25	2	57
 \.
 
 
@@ -1433,14 +1667,14 @@ COPY public.enablers (enablersid, roleid, stateid, categoryid) FROM stdin;
 -- Name: enablers_elablersid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.enablers_elablersid_seq', 189, true);
+SELECT pg_catalog.setval('public.enablers_elablersid_seq', 190, true);
 
 
 --
 -- Name: incredientdecrementid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.incredientdecrementid_seq', 114, true);
+SELECT pg_catalog.setval('public.incredientdecrementid_seq', 270, true);
 
 
 --
@@ -1448,63 +1682,7 @@ SELECT pg_catalog.setval('public.incredientdecrementid_seq', 114, true);
 --
 
 COPY public.ingredient (ingredientid, ingredientcategoryid, name, description, visibility, allergen, updateavailabilityflag, availablequantity, checkavailabilityflag, unitmeasure) FROM stdin;
-143	48	roast beef		t	f	f	0.00	f	gr
-151	52	salsa rosa		t	f	f	0.00	f	gr
-164	52	salsa tonnata		t	f	f	0.00	f	gr
-173	52	salsa piccante		t	f	f	0.00	f	gr
-159	47	pan brioche		t	f	f	0.00	f	gr
-134	50	bacon		t	f	f	0.00	f	gr
-153	48	carne di manzo		t	f	f	0.00	f	gr
-152	50	bresaola		t	f	f	0.00	f	gr
-141	52	crema di funghi porcini		t	f	f	0.00	f	gr
-168	47	barros		t	f	f	0.00	f	unità
-148	48	cotoletta		t	f	f	0.00	f	gr
-136	52	barbecue		t	f	f	0.00	f	gr
-128	49	gorgonzola		t	f	f	0.00	f	gr
-115	48	hamburger		t	f	f	0.00	f	unità
-131	49	ceddar		t	f	f	0.00	f	gr
-140	51	friarielli		t	f	f	0.00	f	gr
-170	48	hamburger di pollo		t	f	f	0.00	f	unità
-171	48	hamburger di angus		t	f	f	0.00	f	unità
-172	48	hamburger di chianina		t	f	f	0.00	f	unità
-116	51	insalata		t	f	f	0.00	f	gr
-137	48	hot dog		t	f	f	0.00	f	gr
-125	51	funghi		t	f	f	0.00	f	gr
-122	51	melanzane a funghetti		t	f	f	0.00	f	gr
-138	49	mozzarella		t	f	f	0.00	f	gr
-135	52	mayonese		t	f	f	0.00	f	gr
-118	51	patate		t	f	f	0.00	f	gr
-133	51	insalata coleslaw		t	f	f	0.00	f	gr
-146	50	pancetta		t	f	f	0.00	f	gr
-154	51	peperoni		t	f	f	0.00	f	gr
-142	51	patate al rosmarino		t	f	f	0.00	f	gr
-149	51	parmigiana di melanzan		t	f	f	0.00	f	gr
-144	48	petto di pollo		t	f	f	0.00	f	gr
-117	51	pomodoro		t	f	f	0.00	f	gr
-155	48	polpettine di scottona		t	f	f	0.00	f	gr
-120	50	prosciutto cotto		t	f	f	0.00	f	gr
-121	49	provola		t	f	f	0.00	f	gr
-124	50	prosciutto crudo		t	f	f	0.00	f	gr
-126	51	rucola		t	f	f	0.00	f	gr
-132	51	cipolla sfumata		t	f	f	0.00	f	gr
-127	52	salse		t	f	f	0.00	f	gr
-139	48	salsiccia		t	f	f	0.00	f	gr
-167	51	cipolla		t	f	f	0.00	f	gr
-145	49	scaglie di parmigiano		t	f	f	0.00	f	gr
-123	50	speck		t	f	f	0.00	f	gr
-161	47	saltimbocca		t	f	f	0.00	f	unità
-147	51	melanzane alla griglia		t	f	f	0.00	f	gr
-160	47	sfilatino		t	f	f	0.00	f	gr
-119	49	sottiletta		t	f	f	0.00	f	unità
-130	48	wurstel		t	f	f	0.00	f	gr
-165	48	wurstel a pezzi		t	f	f	0.00	f	gr
-158	52	salsa barbecue		t	f	f	0.00	f	gr
-157	51	patate al ceddar		t	f	f	0.00	f	gr
-156	51	anelli di cipolla		t	f	f	0.00	f	gr
-166	51	cipolla cruda		t	f	f	0.00	f	gr
-169	48	frittata di cipolle		t	f	f	0.00	f	unità
-129	48	uova		t	f	f	0.00	f	gr
-150	48	cordon blue		t	f	f	0.00	f	unità
+180	56	green salad		t	f	f	0.00	f	gr
 \.
 
 
@@ -1512,7 +1690,7 @@ COPY public.ingredient (ingredientid, ingredientcategoryid, name, description, v
 -- Name: ingredient_categoryid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.ingredient_categoryid_seq', 52, true);
+SELECT pg_catalog.setval('public.ingredient_categoryid_seq', 56, true);
 
 
 --
@@ -1520,12 +1698,7 @@ SELECT pg_catalog.setval('public.ingredient_categoryid_seq', 52, true);
 --
 
 COPY public.ingredientcategory (ingredientcategoryid, name, description, visibility) FROM stdin;
-47	pane		t
-48	carne		t
-49	formaggi		t
-50	salumi		t
-51	verdure		t
-52	salse		t
+56	vegetables		t
 \.
 
 
@@ -1534,13 +1707,6 @@ COPY public.ingredientcategory (ingredientcategoryid, name, description, visibil
 --
 
 COPY public.ingredientcourse (ingredientcourseid, courseid, ingredientid, quantity) FROM stdin;
-350	401	115	1.00
-351	401	116	\N
-352	401	119	1.00
-353	401	159	\N
-355	403	117	30.00
-356	405	116	\N
-357	405	153	\N
 \.
 
 
@@ -1548,7 +1714,7 @@ COPY public.ingredientcourse (ingredientcourseid, courseid, ingredientid, quanti
 -- Name: ingredientcourseid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.ingredientcourseid_seq', 357, true);
+SELECT pg_catalog.setval('public.ingredientcourseid_seq', 362, true);
 
 
 --
@@ -1563,7 +1729,7 @@ COPY public.ingredientdecrement (ingredientdecrementid, orderitemid, typeofdecre
 -- Name: ingredientid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.ingredientid_seq', 173, true);
+SELECT pg_catalog.setval('public.ingredientid_seq', 180, true);
 
 
 --
@@ -1578,7 +1744,7 @@ COPY public.ingredientincrement (ingredientincrementid, ingredientid, comment, u
 -- Name: ingredientincrementid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.ingredientincrementid_seq', 6, true);
+SELECT pg_catalog.setval('public.ingredientincrementid_seq', 32, true);
 
 
 --
@@ -1586,48 +1752,6 @@ SELECT pg_catalog.setval('public.ingredientincrementid_seq', 6, true);
 --
 
 COPY public.ingredientprice (ingredientpriceid, ingredientid, quantity, isdefaultadd, isdefaultsubtract, addprice, subtractprice) FROM stdin;
-10	120	10.00	f	f	1.00	1.00
-16	138	10.00	f	f	1.00	1.00
-42	171	1.00	f	f	6.00	6.00
-19	128	10.00	f	f	1.00	1.00
-43	172	1.00	f	f	6.00	6.00
-57	119	1.00	f	f	0.50	0.50
-38	143	1.00	f	f	3.00	3.00
-48	120	30.00	f	f	3.00	3.00
-15	147	10.00	f	f	1.00	1.00
-17	131	10.00	f	f	1.00	1.00
-39	150	1.00	f	f	3.00	3.00
-46	124	20.00	f	f	2.00	2.00
-12	123	10.00	f	f	1.00	1.00
-11	124	10.00	f	f	1.00	1.00
-33	169	1.00	f	f	2.00	2.00
-25	134	10.00	f	f	1.50	1.50
-61	115	1.00	f	f	3.00	3.00
-47	120	20.00	f	f	2.00	2.00
-37	148	1.00	f	f	3.00	3.00
-13	145	10.00	f	f	1.00	1.00
-41	170	1.00	f	f	6.00	6.00
-8	116	10.00	f	f	0.50	0.50
-28	156	10.00	f	f	1.50	1.50
-58	159	1.00	f	f	1.00	1.00
-54	115	2.00	f	f	5.00	5.00
-35	144	1.00	f	f	3.00	3.00
-31	161	1.00	f	f	2.00	2.00
-40	152	10.00	f	f	4.00	4.00
-59	168	1.00	f	f	2.00	2.00
-32	129	1.00	f	f	2.00	2.00
-36	139	1.00	f	f	3.00	3.00
-22	164	10.00	f	f	1.00	1.00
-23	166	10.00	f	f	1.00	1.00
-26	122	10.00	f	f	1.50	1.50
-29	167	10.00	f	f	1.00	1.00
-14	146	10.00	f	f	1.00	1.00
-27	142	10.00	f	f	1.50	1.50
-24	165	10.00	f	f	1.00	1.00
-55	125	20.00	f	f	1.50	1.50
-9	117	10.00	f	f	0.50	0.50
-20	125	10.00	f	f	1.00	1.00
-62	139	2.00	t	t	4.00	4.00
 \.
 
 
@@ -1635,7 +1759,22 @@ COPY public.ingredientprice (ingredientpriceid, ingredientid, quantity, isdefaul
 -- Name: ingredientpriceid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.ingredientpriceid_seq', 62, true);
+SELECT pg_catalog.setval('public.ingredientpriceid_seq', 98, true);
+
+
+--
+-- Data for Name: invoices; Type: TABLE DATA; Schema: public; Owner: Tonyx
+--
+
+COPY public.invoices (invoicesid, data, invoicenumber, customerdataid, date, suborderid, orderid) FROM stdin;
+\.
+
+
+--
+-- Name: invoicesid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
+--
+
+SELECT pg_catalog.setval('public.invoicesid_seq', 45, true);
 
 
 --
@@ -1643,7 +1782,6 @@ SELECT pg_catalog.setval('public.ingredientpriceid_seq', 62, true);
 --
 
 COPY public.observers (observersid, stateid, roleid, categoryid) FROM stdin;
-208	2	25	57
 \.
 
 
@@ -1651,7 +1789,7 @@ COPY public.observers (observersid, stateid, roleid, categoryid) FROM stdin;
 -- Name: observers_observerid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.observers_observerid_seq', 209, true);
+SELECT pg_catalog.setval('public.observers_observerid_seq', 210, true);
 
 
 --
@@ -1666,29 +1804,6 @@ SELECT pg_catalog.setval('public.observers_observersid_seq', 1, false);
 --
 
 COPY public.orderitems (orderitemid, courseid, quantity, orderid, comment, price, stateid, archived, startingtime, closingtime, ordergroupid, hasbeenrejected, suborderid, isinsasuborder, printcount) FROM stdin;
-1037	401	1	450		8.00	6	\N	2018-10-02 13:30:22.982386	2018-10-02 13:43:21.380604	250	f	\N	f	0
-1046	401	1	456		8.00	6	\N	2018-10-03 18:32:19.862042	2018-10-03 18:38:47.636755	256	f	\N	f	0
-1033	401	1	449		5.00	6	\N	2018-10-02 12:56:21.295913	2018-10-02 13:31:46.509193	248	f	190	t	0
-1034	401	1	449		5.00	6	\N	2018-10-02 13:02:56.185711	2018-10-02 13:31:45.074723	248	f	190	t	0
-1036	401	1	449		6.50	6	\N	2018-10-02 13:22:36.9375	2018-10-02 13:31:43.601504	249	f	191	t	0
-1045	401	1	455		7.00	6	\N	2018-10-03 18:17:40.641164	2018-10-03 18:38:51.165685	255	f	193	t	0
-1044	402	1	455		3.00	6	\N	2018-10-03 18:14:16.5468	2018-10-03 18:38:52.162196	254	f	192	t	0
-1035	402	1	449		3.00	1	\N	2018-10-02 13:08:52.600411	\N	249	f	\N	f	0
-1043	401	1	455		5.00	6	\N	2018-10-03 18:13:40.929254	2018-10-03 18:38:53.089423	254	f	192	t	0
-1055	403	1	463		8.00	2	\N	2018-10-07 14:35:07.03255	\N	265	f	0	f	0
-1040	401	1	453		5.00	1	\N	2018-10-02 13:59:59.050286	\N	252	t	\N	f	0
-1041	401	1	454		5.00	1	\N	2018-10-02 22:21:22.258844	\N	253	t	\N	f	0
-1054	405	1	463		6.00	2	\N	2018-10-07 14:33:12.085588	\N	266	f	200	t	0
-1042	401	1	454	mod	4.00	1	\N	2018-10-02 22:25:55.120431	\N	253	t	\N	f	0
-1047	401	1	457	ben cotto	6.00	6	\N	2018-10-03 19:50:40.228689	2018-10-03 20:03:51.594147	257	f	194	t	0
-1048	401	1	457		5.00	6	\N	2018-10-03 20:00:04.013568	2018-10-03 20:05:00.754754	258	f	195	t	0
-1056	401	1	463		9.00	1	\N	2018-10-07 18:20:53.411383	\N	266	f	\N	f	0
-1049	401	1	458		5.00	6	\N	2018-10-03 20:08:12.503949	2018-10-03 20:46:46.694339	259	f	\N	f	0
-1038	401	1	450		5.00	6	\N	2018-10-02 13:30:27.623254	2018-10-02 13:32:26.653339	250	f	\N	f	0
-1050	401	1	459		5.00	6	\N	2018-10-03 20:46:15.416546	2018-10-03 20:47:03.052712	260	f	\N	f	0
-1051	401	1	459		5.00	6	\N	2018-10-03 20:57:33.376268	2018-10-03 22:56:23.880479	261	f	\N	f	0
-1052	401	1	461		8.00	6	\N	2018-10-03 22:52:27.845675	2018-10-03 22:56:32.206268	262	f	196	t	0
-1053	402	1	461		3.00	2	\N	2018-10-03 22:55:38.592566	\N	263	f	197	t	0
 \.
 
 
@@ -1696,7 +1811,7 @@ COPY public.orderitems (orderitemid, courseid, quantity, orderid, comment, price
 -- Name: orderitems_orderitemid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.orderitems_orderitemid_seq', 1056, true);
+SELECT pg_catalog.setval('public.orderitems_orderitemid_seq', 1382, true);
 
 
 --
@@ -1704,71 +1819,6 @@ SELECT pg_catalog.setval('public.orderitems_orderitemid_seq', 1056, true);
 --
 
 COPY public.orderitemstates (orderitemstatesid, orderitemid, stateid, startingtime) FROM stdin;
-1982	1033	1	2018-10-02 12:56:21.295913
-1983	1034	1	2018-10-02 13:02:56.185711
-1984	1035	1	2018-10-02 13:08:52.600411
-1985	1033	2	2018-10-02 13:10:24.121616
-1986	1034	2	2018-10-02 13:10:24.143424
-1987	1033	6	2018-10-02 13:18:11.692256
-1988	1034	2	2018-10-02 13:22:01.562329
-1989	1036	1	2018-10-02 13:22:36.9375
-1990	1036	2	2018-10-02 13:23:07.354623
-1991	1033	2	2018-10-02 13:24:25.783447
-1992	1033	2	2018-10-02 13:25:08.758777
-1993	1037	1	2018-10-02 13:30:22.982386
-1994	1038	1	2018-10-02 13:30:27.623254
-1995	1038	2	2018-10-02 13:31:24.845203
-1996	1037	2	2018-10-02 13:31:25.920015
-1997	1036	6	2018-10-02 13:31:43.601504
-1998	1034	6	2018-10-02 13:31:45.074723
-1999	1033	6	2018-10-02 13:31:46.509193
-2000	1038	6	2018-10-02 13:32:26.653339
-2001	1037	2	2018-10-02 13:42:36.489264
-2002	1037	6	2018-10-02 13:43:21.380604
-2004	1040	1	2018-10-02 13:59:59.050286
-2005	1040	2	2018-10-02 14:00:00.570177
-2006	1041	1	2018-10-02 22:21:22.258844
-2007	1042	1	2018-10-02 22:25:55.120431
-2008	1041	2	2018-10-02 22:29:02.48767
-2009	1042	2	2018-10-02 22:29:59.841457
-2010	1043	1	2018-10-03 18:13:40.929254
-2011	1044	1	2018-10-03 18:14:16.5468
-2012	1043	2	2018-10-03 18:15:48.198426
-2013	1044	2	2018-10-03 18:15:48.221989
-2014	1045	1	2018-10-03 18:17:40.641164
-2015	1045	2	2018-10-03 18:20:27.045537
-2016	1046	1	2018-10-03 18:32:19.862042
-2017	1046	2	2018-10-03 18:33:42.930778
-2018	1046	6	2018-10-03 18:38:47.636755
-2019	1045	6	2018-10-03 18:38:51.165685
-2020	1044	6	2018-10-03 18:38:52.162196
-2021	1043	6	2018-10-03 18:38:53.089423
-2022	1041	2	2018-10-03 18:39:57.915164
-2023	1047	1	2018-10-03 19:50:40.228689
-2024	1048	1	2018-10-03 20:00:04.013568
-2025	1047	2	2018-10-03 20:01:03.905422
-2026	1047	6	2018-10-03 20:03:51.594147
-2027	1048	2	2018-10-03 20:04:25.606373
-2028	1048	6	2018-10-03 20:05:00.754754
-2029	1049	1	2018-10-03 20:08:12.503949
-2030	1049	2	2018-10-03 20:08:14.442246
-2031	1050	1	2018-10-03 20:46:15.416546
-2032	1050	2	2018-10-03 20:46:18.057278
-2033	1049	6	2018-10-03 20:46:46.694339
-2034	1050	6	2018-10-03 20:47:03.052712
-2035	1051	1	2018-10-03 20:57:33.376268
-2036	1051	2	2018-10-03 20:57:39.113683
-2037	1052	1	2018-10-03 22:52:27.845675
-2038	1052	2	2018-10-03 22:54:29.282537
-2039	1053	1	2018-10-03 22:55:38.592566
-2040	1053	2	2018-10-03 22:55:40.845355
-2041	1051	6	2018-10-03 22:56:23.880479
-2042	1052	6	2018-10-03 22:56:32.206268
-2043	1054	1	2018-10-07 14:33:12.085588
-2044	1055	1	2018-10-07 14:35:07.03255
-2045	1055	2	2018-10-07 14:35:28.608859
-2046	1054	2	2018-10-07 14:37:07.00883
-2047	1056	1	2018-10-07 18:20:53.411383
 \.
 
 
@@ -1776,7 +1826,7 @@ COPY public.orderitemstates (orderitemstatesid, orderitemid, stateid, startingti
 -- Name: orderitemstates_orderitemstates_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.orderitemstates_orderitemstates_id_seq', 2047, true);
+SELECT pg_catalog.setval('public.orderitemstates_orderitemstates_id_seq', 2594, true);
 
 
 --
@@ -1784,33 +1834,6 @@ SELECT pg_catalog.setval('public.orderitemstates_orderitemstates_id_seq', 2047, 
 --
 
 COPY public.orderoutgroup (ordergroupid, printcount, orderid, groupidentifier) FROM stdin;
-239	1	447	1
-240	1	447	2
-241	1	447	3
-242	1	447	4
-243	1	447	5
-244	1	448	1
-245	1	448	2
-247	1	447	6
-246	1	448	3
-249	0	449	2
-248	1	449	1
-250	0	450	1
-252	0	453	1
-253	0	454	1
-254	1	455	1
-255	2	455	2
-256	1	456	1
-258	0	457	2
-257	1	457	1
-259	0	458	1
-260	1	459	1
-261	0	459	2
-262	1	461	1
-263	1	461	2
-265	2	463	2
-264	1	463	1
-266	0	463	3
 \.
 
 
@@ -1818,7 +1841,7 @@ COPY public.orderoutgroup (ordergroupid, printcount, orderid, groupidentifier) F
 -- Name: orderoutgroup_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.orderoutgroup_id_seq', 266, true);
+SELECT pg_catalog.setval('public.orderoutgroup_id_seq', 499, true);
 
 
 --
@@ -1826,21 +1849,6 @@ SELECT pg_catalog.setval('public.orderoutgroup_id_seq', 266, true);
 --
 
 COPY public.orders (orderid, "table", person, ongoing, userid, startingtime, closingtime, voided, archived, total, adjustedtotal, plaintotalvariation, percentagevariataion, adjustispercentage, adjustisplain, forqruserarchived) FROM stdin;
-458	1		f	170	2018-10-03 20:07:29.974746	2018-10-03 20:58:01.479193	f	t	5.00	5.00	0.00	0.00	f	f	t
-453	3		t	170	2018-10-02 13:59:32.449038	2018-10-03 10:59:09.756359	f	t	5.00	5.00	0.00	0.00	f	f	t
-457	1		f	2	2018-10-03 19:50:19.703867	2018-10-03 20:06:06.209554	f	t	11.00	11.00	0.00	0.00	f	f	\N
-450	2		f	2	2018-10-02 13:30:18.902624	2018-10-02 13:44:40.291154	f	t	13.00	13.00	0.00	0.00	f	f	\N
-455	4		f	2	2018-10-03 18:13:29.502354	2018-10-03 18:27:13.417978	f	t	15.00	15.00	-5.00	0.00	f	t	\N
-448	3		f	2	2018-09-28 15:20:41.149321	2018-10-02 13:44:41.573372	f	t	0.00	0.00	0.00	0.00	f	f	\N
-449	1		t	2	2018-10-02 12:55:58.549307	2018-10-03 10:59:07.876485	t	t	16.50	16.50	0.00	0.00	f	f	\N
-456	3		f	2	2018-10-03 18:32:11.970005	2018-10-03 18:39:07.073838	f	t	8.00	8.00	0.00	0.00	f	f	\N
-454	2		t	2	2018-10-02 22:21:18.327387	2018-10-03 10:59:11.403699	t	t	4.00	4.00	0.00	0.00	f	f	\N
-462	4		t	170	2018-10-03 22:59:24.972412	2018-10-07 14:37:42.715502	f	t	0.00	0.00	0.00	0.00	f	f	\N
-461	6		t	2	2018-10-03 22:51:55.26182	\N	f	f	11.00	9.90	0.00	-10.00	t	f	\N
-459	1		f	2	2018-10-03 20:46:11.973257	2018-10-03 20:58:03.513372	f	t	10.00	10.00	0.00	0.00	f	f	\N
-447	1		t	2	2018-09-28 11:20:49.881203	2018-10-02 13:52:31.431727	t	t	0.00	0.00	0.00	-10.00	t	f	\N
-460	5		t	2	2018-10-03 21:12:53.642454	2018-10-03 22:57:11.658955	f	t	0.00	0.00	0.00	0.00	f	f	\N
-463	7		t	2	2018-10-07 14:31:42.599904	\N	f	f	14.00	12.60	0.00	-10.00	t	f	\N
 \.
 
 
@@ -1848,7 +1856,22 @@ COPY public.orders (orderid, "table", person, ongoing, userid, startingtime, clo
 -- Name: orders_orderid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.orders_orderid_seq', 463, true);
+SELECT pg_catalog.setval('public.orders_orderid_seq', 587, true);
+
+
+--
+-- Name: paymentid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
+--
+
+SELECT pg_catalog.setval('public.paymentid_seq', 115, true);
+
+
+--
+-- Data for Name: paymentitem; Type: TABLE DATA; Schema: public; Owner: Tonyx
+--
+
+COPY public.paymentitem (paymentid, suborderid, orderid, tendercodesid, amount) FROM stdin;
+\.
 
 
 --
@@ -1856,10 +1879,6 @@ SELECT pg_catalog.setval('public.orders_orderid_seq', 463, true);
 --
 
 COPY public.printerforcategory (printerforcategoryid, categoryid, printerid, stateid) FROM stdin;
-40	57	25	2
-41	58	28	2
-42	61	25	2
-43	59	25	2
 \.
 
 
@@ -1867,7 +1886,7 @@ COPY public.printerforcategory (printerforcategoryid, categoryid, printerid, sta
 -- Name: printerforcategory_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.printerforcategory_id_seq', 43, true);
+SELECT pg_catalog.setval('public.printerforcategory_id_seq', 55, true);
 
 
 --
@@ -1875,7 +1894,6 @@ SELECT pg_catalog.setval('public.printerforcategory_id_seq', 43, true);
 --
 
 COPY public.printerforreceiptandinvoice (printerforcategoryid, printinvoice, printreceipt, printerid) FROM stdin;
-1	t	t	25
 \.
 
 
@@ -1883,7 +1901,7 @@ COPY public.printerforreceiptandinvoice (printerforcategoryid, printinvoice, pri
 -- Name: printerforreceiptandinvoice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.printerforreceiptandinvoice_id_seq', 1, true);
+SELECT pg_catalog.setval('public.printerforreceiptandinvoice_id_seq', 4, true);
 
 
 --
@@ -1891,9 +1909,6 @@ SELECT pg_catalog.setval('public.printerforreceiptandinvoice_id_seq', 1, true);
 --
 
 COPY public.printers (printerid, name) FROM stdin;
-25	PDFwriter
-28	PDFwriter_2
-29	PDFwriter_3
 \.
 
 
@@ -1901,7 +1916,7 @@ COPY public.printers (printerid, name) FROM stdin;
 -- Name: printers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.printers_id_seq', 29, true);
+SELECT pg_catalog.setval('public.printers_id_seq', 41, true);
 
 
 --
@@ -1909,14 +1924,6 @@ SELECT pg_catalog.setval('public.printers_id_seq', 29, true);
 --
 
 COPY public.rejectedorderitems (rejectedorderitemid, courseid, cause, timeofrejection, orderitemid) FROM stdin;
-44	401	non ci sono più' funghi	2018-10-02 13:18:57.523549	1034
-45	401	funghi	2018-10-02 13:23:18.219128	1033
-46	401	boh	2018-10-02 13:24:42.869936	1033
-47	401	ingredienti mancanti	2018-10-02 13:32:06.121971	1037
-48	401	non mi va	2018-10-02 22:30:23.425752	1041
-49	401	x	2018-10-03 20:03:05.785011	1040
-50	401	x	2018-10-03 20:03:18.904531	1041
-51	401	x	2018-10-03 20:03:22.025259	1042
 \.
 
 
@@ -1924,7 +1931,7 @@ COPY public.rejectedorderitems (rejectedorderitemid, courseid, cause, timeofreje
 -- Name: rejectedorderitems_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.rejectedorderitems_id_seq', 51, true);
+SELECT pg_catalog.setval('public.rejectedorderitems_id_seq', 81, true);
 
 
 --
@@ -1933,12 +1940,6 @@ SELECT pg_catalog.setval('public.rejectedorderitems_id_seq', 51, true);
 
 COPY public.roles (roleid, rolename, comment) FROM stdin;
 1	admin	\N
-2	powerUser	\N
-21	temporary	
-23	ruolo1	
-24	ruolo2	
-25	cucina	
-26	thai	
 \.
 
 
@@ -1946,7 +1947,7 @@ COPY public.roles (roleid, rolename, comment) FROM stdin;
 -- Name: roles_roleid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.roles_roleid_seq', 26, true);
+SELECT pg_catalog.setval('public.roles_roleid_seq', 27, true);
 
 
 --
@@ -1956,7 +1957,7 @@ SELECT pg_catalog.setval('public.roles_roleid_seq', 26, true);
 COPY public.states (stateid, isinitial, isfinal, statusname, nextstateid, isexceptional, creatingingredientdecrement) FROM stdin;
 1	t	f	COLLECTING	2	f	f
 6	f	t	DONE	\N	f	f
-2	f	f	TOBEWORKED	6	f	f
+2	f	f	TOBEWORKED	6	f	t
 \.
 
 
@@ -1971,18 +1972,7 @@ SELECT pg_catalog.setval('public.states_stateid_seq', 6, true);
 -- Data for Name: suborder; Type: TABLE DATA; Schema: public; Owner: Tonyx
 --
 
-COPY public.suborder (suborderid, orderid, subtotal, comment, payed, creationtime) FROM stdin;
-188	447	21.50	\N	f	2018-09-29 20:05:57.455085
-189	448	27.00	\N	f	2018-09-29 20:07:09.117411
-190	449	10.00	\N	f	2018-10-02 13:48:11.269038
-191	449	6.50	\N	f	2018-10-02 13:48:54.437523
-192	455	8.00	\N	t	2018-10-03 18:25:50.843916
-193	455	7.00	\N	t	2018-10-03 18:26:22.20885
-194	457	6.00	\N	f	2018-10-03 20:05:26.686485
-195	457	5.00	\N	f	2018-10-03 20:05:29.941193
-196	461	8.00	\N	f	2018-10-03 22:57:48.407125
-197	461	3.00	\N	f	2018-10-03 22:57:53.872079
-200	463	8.00	\N	f	2018-10-07 14:39:58.457064
+COPY public.suborder (suborderid, orderid, subtotal, comment, payed, creationtime, tendercodesid, subtotaladjustment, subtotalpercentadjustment) FROM stdin;
 \.
 
 
@@ -1990,7 +1980,7 @@ COPY public.suborder (suborderid, orderid, subtotal, comment, payed, creationtim
 -- Name: suborderid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.suborderid_seq', 200, true);
+SELECT pg_catalog.setval('public.suborderid_seq', 316, true);
 
 
 --
@@ -2005,7 +1995,7 @@ COPY public.temp_user_actionable_states (tempuseractionablestateid, userid, stat
 -- Name: temp_user_actionable_states_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.temp_user_actionable_states_seq', 13, true);
+SELECT pg_catalog.setval('public.temp_user_actionable_states_seq', 12, true);
 
 
 --
@@ -2013,7 +2003,6 @@ SELECT pg_catalog.setval('public.temp_user_actionable_states_seq', 13, true);
 --
 
 COPY public.temp_user_default_actionable_states (tempmuseractionablestatesid, stateid) FROM stdin;
-13	1
 \.
 
 
@@ -2025,15 +2014,31 @@ SELECT pg_catalog.setval('public.tempuseractionablestates_seq', 1, false);
 
 
 --
+-- Data for Name: tendercodes; Type: TABLE DATA; Schema: public; Owner: Tonyx
+--
+
+COPY public.tendercodes (tendercodesid, tendercode, tendername) FROM stdin;
+1	1	CONTANTI
+2	2	CREDITO
+3	3	ASSEGNI
+5	4	BUONI
+6	5	CARTA DI CREDITO
+\.
+
+
+--
+-- Name: tendercodesid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
+--
+
+SELECT pg_catalog.setval('public.tendercodesid_seq', 6, true);
+
+
+--
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: Tonyx
 --
 
 COPY public.users (userid, username, password, enabled, canvoidorders, role, canmanageallorders, creationtime, istemporary, canchangetheprice, "table", consumed, canmanagecourses) FROM stdin;
-2	tonyx	a66fb91959ab47eaf8d9ce0e2fd750ed36ffd5bf7cdc806c3fd3f6f80623bb9e	t	t	1	t	\N	f	t	\N	\N	f
-165	utente	258c2a65992dae5f7175d6ad61cd242da2aa82339305a8b12eeb7d81a32ad2dd	t	f	23	f	\N	f	f	\N	\N	f
-166	tonino	87cfad1b5f9782a36c7b8fd877c65a6f7d96e6499149323826ad4bc327bbf37c	t	f	23	t	\N	f	f	\N	\N	f
-167	cucina	41613c0e1d7698d83847b8a78d03c6c4c617c631f75e8a4cff531ef11cf0deed	t	f	25	f	\N	f	f	\N	\N	f
-170	0HDIGWVUW63G		t	f	21	f	2018-10-03 22:59:24.965774	t	f	4	\N	f
+2	administrator	4194d1706ed1f408d5e02d672777019f4d5385c766a8c6ca8acba3167d36a7b9	t	t	1	t	\N	f	t	\N	\N	f
 \.
 
 
@@ -2041,7 +2046,7 @@ COPY public.users (userid, username, password, enabled, canvoidorders, role, can
 -- Name: users_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.users_userid_seq', 170, true);
+SELECT pg_catalog.setval('public.users_userid_seq', 174, true);
 
 
 --
@@ -2049,25 +2054,6 @@ SELECT pg_catalog.setval('public.users_userid_seq', 170, true);
 --
 
 COPY public.variations (variationsid, orderitemid, ingredientid, tipovariazione, plailnumvariation, ingredientpriceid) FROM stdin;
-936	1036	125	PER_PREZZO_INGREDIENTE	\N	55
-937	1033	143	✋	\N	\N
-938	1037	143	PER_PREZZO_INGREDIENTE	\N	38
-941	1037	168	unità	1	\N
-943	1038	116	🚫	\N	\N
-944	1038	125	✋	\N	\N
-945	1037	159	🚫	\N	\N
-950	1041	119	unità	-1	\N
-953	1042	159	🚫	\N	\N
-954	1042	168	unità	1	\N
-955	1045	159	🚫	\N	\N
-956	1045	168	unità	1	\N
-957	1046	150	PER_PREZZO_INGREDIENTE	\N	39
-958	1046	116	😍	\N	\N
-960	1047	116	🚫	\N	\N
-966	1047	125	PER_PREZZO_INGREDIENTE	\N	20
-967	1052	143	PER_PREZZO_INGREDIENTE	\N	38
-968	1054	116	😍	\N	\N
-969	1056	139	PER_PREZZO_INGREDIENTE	\N	62
 \.
 
 
@@ -2075,14 +2061,14 @@ COPY public.variations (variationsid, orderitemid, ingredientid, tipovariazione,
 -- Name: variations_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.variations_seq', 969, true);
+SELECT pg_catalog.setval('public.variations_seq', 1079, true);
 
 
 --
 -- Name: voidedorderslog_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.voidedorderslog_id_seq', 219, true);
+SELECT pg_catalog.setval('public.voidedorderslog_id_seq', 307, true);
 
 
 --
@@ -2090,9 +2076,6 @@ SELECT pg_catalog.setval('public.voidedorderslog_id_seq', 219, true);
 --
 
 COPY public.voidedorderslogbuffer (voidedorderslogbufferid, voidedtime, orderid, userid) FROM stdin;
-217	2018-10-02 13:02:46.552562	447	2
-218	2018-10-02 22:20:56.17596	449	2
-219	2018-10-03 18:40:15.656141	454	2
 \.
 
 
@@ -2101,12 +2084,6 @@ COPY public.voidedorderslogbuffer (voidedorderslogbufferid, voidedtime, orderid,
 --
 
 COPY public.waiteractionablestates (waiterwatchablestatesid, userid, stateid) FROM stdin;
-289	165	1
-290	2	2
-291	166	1
-292	167	1
-113	2	1
-293	170	1
 \.
 
 
@@ -2114,7 +2091,7 @@ COPY public.waiteractionablestates (waiterwatchablestatesid, userid, stateid) FR
 -- Name: waiteractionablestates_seq; Type: SEQUENCE SET; Schema: public; Owner: Tonyx
 --
 
-SELECT pg_catalog.setval('public.waiteractionablestates_seq', 293, true);
+SELECT pg_catalog.setval('public.waiteractionablestates_seq', 300, true);
 
 
 --
@@ -2147,6 +2124,30 @@ ALTER TABLE ONLY public.coursecategories
 
 ALTER TABLE ONLY public.courses
     ADD CONSTRAINT courses_pkey PRIMARY KEY (courseid);
+
+
+--
+-- Name: customerdata customer_name_unique; Type: CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.customerdata
+    ADD CONSTRAINT customer_name_unique UNIQUE (name);
+
+
+--
+-- Name: customerdata customerdata_name_key; Type: CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.customerdata
+    ADD CONSTRAINT customerdata_name_key UNIQUE (name);
+
+
+--
+-- Name: customerdata customerdata_pkey; Type: CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.customerdata
+    ADD CONSTRAINT customerdata_pkey PRIMARY KEY (customerdataid);
 
 
 --
@@ -2262,6 +2263,14 @@ ALTER TABLE ONLY public.ingredientprice
 
 
 --
+-- Name: invoices invoices_pkey; Type: CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.invoices
+    ADD CONSTRAINT invoices_pkey PRIMARY KEY (invoicesid);
+
+
+--
 -- Name: observers observers_pkey; Type: CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
@@ -2307,6 +2316,14 @@ ALTER TABLE ONLY public.orderoutgroup
 
 ALTER TABLE ONLY public.orders
     ADD CONSTRAINT orders_pkey PRIMARY KEY (orderid);
+
+
+--
+-- Name: paymentitem payment_key; Type: CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.paymentitem
+    ADD CONSTRAINT payment_key PRIMARY KEY (paymentid);
 
 
 --
@@ -2435,6 +2452,30 @@ ALTER TABLE ONLY public.temp_user_default_actionable_states
 
 ALTER TABLE ONLY public.temp_user_actionable_states
     ADD CONSTRAINT tempuserstateidunique UNIQUE (stateid, userid);
+
+
+--
+-- Name: tendercodes tendercode_key; Type: CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.tendercodes
+    ADD CONSTRAINT tendercode_key PRIMARY KEY (tendercodesid);
+
+
+--
+-- Name: tendercodes tendercodes_unique_code; Type: CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.tendercodes
+    ADD CONSTRAINT tendercodes_unique_code UNIQUE (tendercode);
+
+
+--
+-- Name: tendercodes tendercodes_unique_name; Type: CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.tendercodes
+    ADD CONSTRAINT tendercodes_unique_name UNIQUE (tendername);
 
 
 --
@@ -2630,6 +2671,14 @@ ALTER TABLE ONLY public.ingredientprice
 
 
 --
+-- Name: invoices invoice_customer_data_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.invoices
+    ADD CONSTRAINT invoice_customer_data_fk FOREIGN KEY (customerdataid) REFERENCES public.customerdata(customerdataid) MATCH FULL;
+
+
+--
 -- Name: printerforreceiptandinvoice invoice_receipt_printer_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
@@ -2638,10 +2687,26 @@ ALTER TABLE ONLY public.printerforreceiptandinvoice
 
 
 --
+-- Name: paymentitem oorder_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.paymentitem
+    ADD CONSTRAINT oorder_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+
+
+--
 -- Name: archivedorderslogbuffer order_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
 ALTER TABLE ONLY public.archivedorderslogbuffer
+    ADD CONSTRAINT order_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+
+
+--
+-- Name: invoices order_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.invoices
     ADD CONSTRAINT order_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
 
 
@@ -2774,6 +2839,22 @@ ALTER TABLE ONLY public.enablers
 
 
 --
+-- Name: invoices suborder_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.invoices
+    ADD CONSTRAINT suborder_fk FOREIGN KEY (suborderid) REFERENCES public.suborder(suborderid) MATCH FULL;
+
+
+--
+-- Name: paymentitem suborder_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.paymentitem
+    ADD CONSTRAINT suborder_fk FOREIGN KEY (suborderid) REFERENCES public.suborder(suborderid) MATCH FULL;
+
+
+--
 -- Name: suborder suborderorder_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
@@ -2803,6 +2884,14 @@ ALTER TABLE ONLY public.temp_user_actionable_states
 
 ALTER TABLE ONLY public.temp_user_actionable_states
     ADD CONSTRAINT tempuser_user_fk FOREIGN KEY (userid) REFERENCES public.users(userid) MATCH FULL;
+
+
+--
+-- Name: paymentitem tendercode_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
+--
+
+ALTER TABLE ONLY public.paymentitem
+    ADD CONSTRAINT tendercode_fk FOREIGN KEY (tendercodesid) REFERENCES public.tendercodes(tendercodesid) MATCH FULL;
 
 
 --
@@ -2916,6 +3005,20 @@ GRANT ALL ON SEQUENCE public.courses_categoryid_seq TO suave;
 --
 
 GRANT ALL ON SEQUENCE public.courses_courseid_seq TO suave;
+
+
+--
+-- Name: SEQUENCE customerdata_id_seq; Type: ACL; Schema: public; Owner: Tonyx
+--
+
+GRANT ALL ON SEQUENCE public.customerdata_id_seq TO suave;
+
+
+--
+-- Name: TABLE customerdata; Type: ACL; Schema: public; Owner: Tonyx
+--
+
+GRANT ALL ON TABLE public.customerdata TO suave;
 
 
 --
@@ -3094,6 +3197,48 @@ GRANT ALL ON TABLE public.ingredientpricedetails TO suave;
 
 
 --
+-- Name: SEQUENCE invoicesid_seq; Type: ACL; Schema: public; Owner: Tonyx
+--
+
+GRANT ALL ON SEQUENCE public.invoicesid_seq TO suave;
+
+
+--
+-- Name: TABLE invoices; Type: ACL; Schema: public; Owner: Tonyx
+--
+
+GRANT ALL ON TABLE public.invoices TO suave;
+
+
+--
+-- Name: TABLE orders; Type: ACL; Schema: public; Owner: Tonyx
+--
+
+GRANT ALL ON TABLE public.orders TO suave;
+
+
+--
+-- Name: TABLE users; Type: ACL; Schema: public; Owner: Tonyx
+--
+
+GRANT ALL ON TABLE public.users TO suave;
+
+
+--
+-- Name: TABLE nonarchivedorderdetails; Type: ACL; Schema: public; Owner: Tonyx
+--
+
+GRANT ALL ON TABLE public.nonarchivedorderdetails TO suave;
+
+
+--
+-- Name: TABLE nonemptyorderdetails; Type: ACL; Schema: public; Owner: Tonyx
+--
+
+GRANT ALL ON TABLE public.nonemptyorderdetails TO suave;
+
+
+--
 -- Name: SEQUENCE observers_observerid_seq; Type: ACL; Schema: public; Owner: Tonyx
 --
 
@@ -3119,20 +3264,6 @@ GRANT ALL ON SEQUENCE public.observers_observersid_seq TO suave;
 --
 
 GRANT ALL ON TABLE public.observersrolestatuscategories TO suave;
-
-
---
--- Name: TABLE orders; Type: ACL; Schema: public; Owner: Tonyx
---
-
-GRANT ALL ON TABLE public.orders TO suave;
-
-
---
--- Name: TABLE users; Type: ACL; Schema: public; Owner: Tonyx
---
-
-GRANT ALL ON TABLE public.users TO suave;
 
 
 --
@@ -3210,6 +3341,41 @@ GRANT ALL ON TABLE public.orderoutgroupdetails TO suave;
 --
 
 GRANT ALL ON SEQUENCE public.orders_orderid_seq TO suave;
+
+
+--
+-- Name: SEQUENCE paymentid_seq; Type: ACL; Schema: public; Owner: Tonyx
+--
+
+GRANT ALL ON SEQUENCE public.paymentid_seq TO suave;
+
+
+--
+-- Name: TABLE paymentitem; Type: ACL; Schema: public; Owner: Tonyx
+--
+
+GRANT ALL ON TABLE public.paymentitem TO suave;
+
+
+--
+-- Name: SEQUENCE tendercodesid_seq; Type: ACL; Schema: public; Owner: Tonyx
+--
+
+GRANT ALL ON SEQUENCE public.tendercodesid_seq TO suave;
+
+
+--
+-- Name: TABLE tendercodes; Type: ACL; Schema: public; Owner: Tonyx
+--
+
+GRANT ALL ON TABLE public.tendercodes TO suave;
+
+
+--
+-- Name: TABLE paymentitemdetails; Type: ACL; Schema: public; Owner: Tonyx
+--
+
+GRANT ALL ON TABLE public.paymentitemdetails TO suave;
 
 
 --
