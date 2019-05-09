@@ -44,7 +44,6 @@ CREATE TABLE public.archivedorderslogbuffer (
 );
 
 
-ALTER TABLE public.archivedorderslogbuffer OWNER TO "Tonyx";
 
 --
 -- Name: archivedorderslog_id_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -58,7 +57,6 @@ CREATE SEQUENCE public.archivedorderslog_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.archivedorderslog_id_seq OWNER TO "Tonyx";
 
 --
 -- Name: archivedorderslog_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -79,7 +77,6 @@ CREATE TABLE public.coursecategories (
 );
 
 
-ALTER TABLE public.coursecategories OWNER TO "Tonyx";
 
 --
 -- Name: courses; Type: TABLE; Schema: public; Owner: Tonyx
@@ -95,7 +92,6 @@ CREATE TABLE public.courses (
 );
 
 
-ALTER TABLE public.courses OWNER TO "Tonyx";
 
 --
 -- Name: coursedetails2; Type: VIEW; Schema: public; Owner: Tonyx
@@ -114,7 +110,6 @@ CREATE VIEW public.coursedetails2 AS
   ORDER BY a.courseid;
 
 
-ALTER TABLE public.coursedetails2 OWNER TO "Tonyx";
 
 --
 -- Name: courses_categoryid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -128,7 +123,6 @@ CREATE SEQUENCE public.courses_categoryid_seq
     CACHE 1;
 
 
-ALTER TABLE public.courses_categoryid_seq OWNER TO "Tonyx";
 
 --
 -- Name: courses_categoryid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -149,7 +143,6 @@ CREATE SEQUENCE public.courses_courseid_seq
     CACHE 1;
 
 
-ALTER TABLE public.courses_courseid_seq OWNER TO "Tonyx";
 
 --
 -- Name: courses_courseid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -170,7 +163,6 @@ CREATE SEQUENCE public.customerdata_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.customerdata_id_seq OWNER TO "Tonyx";
 
 --
 -- Name: customerdata; Type: TABLE; Schema: public; Owner: Tonyx
@@ -183,7 +175,6 @@ CREATE TABLE public.customerdata (
 );
 
 
-ALTER TABLE public.customerdata OWNER TO "Tonyx";
 
 --
 -- Name: defaulwaiteractionablestates_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -209,7 +200,6 @@ CREATE TABLE public.defaultactionablestates (
 );
 
 
-ALTER TABLE public.defaultactionablestates OWNER TO "Tonyx";
 
 --
 -- Name: enablers_elablersid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -223,7 +213,6 @@ CREATE SEQUENCE public.enablers_elablersid_seq
     CACHE 1;
 
 
-ALTER TABLE public.enablers_elablersid_seq OWNER TO "Tonyx";
 
 --
 -- Name: enablers; Type: TABLE; Schema: public; Owner: Tonyx
@@ -237,7 +226,6 @@ CREATE TABLE public.enablers (
 );
 
 
-ALTER TABLE public.enablers OWNER TO "Tonyx";
 
 --
 -- Name: roles; Type: TABLE; Schema: public; Owner: Tonyx
@@ -250,7 +238,6 @@ CREATE TABLE public.roles (
 );
 
 
-ALTER TABLE public.roles OWNER TO "Tonyx";
 
 --
 -- Name: states_stateid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -264,7 +251,6 @@ CREATE SEQUENCE public.states_stateid_seq
     CACHE 1;
 
 
-ALTER TABLE public.states_stateid_seq OWNER TO "Tonyx";
 
 --
 -- Name: states; Type: TABLE; Schema: public; Owner: Tonyx
@@ -281,7 +267,6 @@ CREATE TABLE public.states (
 );
 
 
-ALTER TABLE public.states OWNER TO "Tonyx";
 
 --
 -- Name: enablersrolestatuscategories; Type: VIEW; Schema: public; Owner: Tonyx
@@ -298,7 +283,6 @@ CREATE VIEW public.enablersrolestatuscategories AS
      JOIN public.states e ON ((a.stateid = e.stateid)));
 
 
-ALTER TABLE public.enablersrolestatuscategories OWNER TO "Tonyx";
 
 --
 -- Name: incredientdecrementid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -312,7 +296,6 @@ CREATE SEQUENCE public.incredientdecrementid_seq
     CACHE 1;
 
 
-ALTER TABLE public.incredientdecrementid_seq OWNER TO "Tonyx";
 
 --
 -- Name: ingredient; Type: TABLE; Schema: public; Owner: Tonyx
@@ -332,7 +315,6 @@ CREATE TABLE public.ingredient (
 );
 
 
-ALTER TABLE public.ingredient OWNER TO "Tonyx";
 
 --
 -- Name: ingredientcategory; Type: TABLE; Schema: public; Owner: Tonyx
@@ -346,7 +328,6 @@ CREATE TABLE public.ingredientcategory (
 );
 
 
-ALTER TABLE public.ingredientcategory OWNER TO "Tonyx";
 
 --
 -- Name: ingredient_categoryid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -360,7 +341,6 @@ CREATE SEQUENCE public.ingredient_categoryid_seq
     CACHE 1;
 
 
-ALTER TABLE public.ingredient_categoryid_seq OWNER TO "Tonyx";
 
 --
 -- Name: ingredient_categoryid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -381,7 +361,6 @@ CREATE TABLE public.ingredientcourse (
 );
 
 
-ALTER TABLE public.ingredientcourse OWNER TO "Tonyx";
 
 --
 -- Name: ingredientcourseid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -395,7 +374,6 @@ CREATE SEQUENCE public.ingredientcourseid_seq
     CACHE 1;
 
 
-ALTER TABLE public.ingredientcourseid_seq OWNER TO "Tonyx";
 
 --
 -- Name: ingredientcourseid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -420,7 +398,6 @@ CREATE TABLE public.ingredientdecrement (
 );
 
 
-ALTER TABLE public.ingredientdecrement OWNER TO "Tonyx";
 
 --
 -- Name: orderitems; Type: TABLE; Schema: public; Owner: Tonyx
@@ -445,7 +422,6 @@ CREATE TABLE public.orderitems (
 );
 
 
-ALTER TABLE public.orderitems OWNER TO "Tonyx";
 
 --
 -- Name: ingredientdecrementview; Type: VIEW; Schema: public; Owner: Tonyx
@@ -477,7 +453,6 @@ CREATE VIEW public.ingredientdecrementview AS
      LEFT JOIN public.ingredientcourse e ON (((e.ingredientid = a.ingredientid) AND (e.courseid = c.courseid))));
 
 
-ALTER TABLE public.ingredientdecrementview OWNER TO "Tonyx";
 
 --
 -- Name: ingredientdetails; Type: VIEW; Schema: public; Owner: Tonyx
@@ -494,7 +469,6 @@ CREATE VIEW public.ingredientdetails AS
      JOIN public.ingredientcategory d ON ((b.ingredientcategoryid = d.ingredientcategoryid)));
 
 
-ALTER TABLE public.ingredientdetails OWNER TO "Tonyx";
 
 --
 -- Name: ingredientid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -508,7 +482,6 @@ CREATE SEQUENCE public.ingredientid_seq
     CACHE 1;
 
 
-ALTER TABLE public.ingredientid_seq OWNER TO "Tonyx";
 
 --
 -- Name: ingredientid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -529,7 +502,6 @@ CREATE SEQUENCE public.ingredientincrementid_seq
     CACHE 1;
 
 
-ALTER TABLE public.ingredientincrementid_seq OWNER TO "Tonyx";
 
 --
 -- Name: ingredientincrement; Type: TABLE; Schema: public; Owner: Tonyx
@@ -546,7 +518,6 @@ CREATE TABLE public.ingredientincrement (
 );
 
 
-ALTER TABLE public.ingredientincrement OWNER TO "Tonyx";
 
 --
 -- Name: ingredientofcourses; Type: VIEW; Schema: public; Owner: Tonyx
@@ -572,7 +543,6 @@ CREATE VIEW public.ingredientofcourses AS
      JOIN public.ingredientcategory d ON ((b.ingredientcategoryid = d.ingredientcategoryid)));
 
 
-ALTER TABLE public.ingredientofcourses OWNER TO "Tonyx";
 
 --
 -- Name: ingredientpriceid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -586,7 +556,6 @@ CREATE SEQUENCE public.ingredientpriceid_seq
     CACHE 1;
 
 
-ALTER TABLE public.ingredientpriceid_seq OWNER TO "Tonyx";
 
 --
 -- Name: ingredientprice; Type: TABLE; Schema: public; Owner: Tonyx
@@ -603,7 +572,6 @@ CREATE TABLE public.ingredientprice (
 );
 
 
-ALTER TABLE public.ingredientprice OWNER TO "Tonyx";
 
 --
 -- Name: ingredientpricedetails; Type: VIEW; Schema: public; Owner: Tonyx
@@ -623,7 +591,6 @@ CREATE VIEW public.ingredientpricedetails AS
   ORDER BY b.name;
 
 
-ALTER TABLE public.ingredientpricedetails OWNER TO "Tonyx";
 
 --
 -- Name: invoicesid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -637,7 +604,6 @@ CREATE SEQUENCE public.invoicesid_seq
     CACHE 1;
 
 
-ALTER TABLE public.invoicesid_seq OWNER TO "Tonyx";
 
 --
 -- Name: invoices; Type: TABLE; Schema: public; Owner: Tonyx
@@ -654,7 +620,6 @@ CREATE TABLE public.invoices (
 );
 
 
-ALTER TABLE public.invoices OWNER TO "Tonyx";
 
 --
 -- Name: orders; Type: TABLE; Schema: public; Owner: Tonyx
@@ -680,7 +645,6 @@ CREATE TABLE public.orders (
 );
 
 
-ALTER TABLE public.orders OWNER TO "Tonyx";
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: Tonyx
@@ -703,7 +667,6 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO "Tonyx";
 
 --
 -- Name: nonarchivedorderdetails; Type: VIEW; Schema: public; Owner: Tonyx
@@ -732,7 +695,6 @@ CREATE VIEW public.nonarchivedorderdetails AS
   ORDER BY a.startingtime;
 
 
-ALTER TABLE public.nonarchivedorderdetails OWNER TO "Tonyx";
 
 --
 -- Name: nonemptyorderdetails; Type: VIEW; Schema: public; Owner: Tonyx
@@ -760,7 +722,6 @@ CREATE VIEW public.nonemptyorderdetails AS
   ORDER BY a.startingtime;
 
 
-ALTER TABLE public.nonemptyorderdetails OWNER TO "Tonyx";
 
 --
 -- Name: observers_observerid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -774,7 +735,6 @@ CREATE SEQUENCE public.observers_observerid_seq
     CACHE 1;
 
 
-ALTER TABLE public.observers_observerid_seq OWNER TO "Tonyx";
 
 --
 -- Name: observers; Type: TABLE; Schema: public; Owner: Tonyx
@@ -788,7 +748,6 @@ CREATE TABLE public.observers (
 );
 
 
-ALTER TABLE public.observers OWNER TO "Tonyx";
 
 --
 -- Name: observers_observersid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -802,7 +761,6 @@ CREATE SEQUENCE public.observers_observersid_seq
     CACHE 1;
 
 
-ALTER TABLE public.observers_observersid_seq OWNER TO "Tonyx";
 
 --
 -- Name: observersrolestatuscategories; Type: VIEW; Schema: public; Owner: Tonyx
@@ -819,7 +777,6 @@ CREATE VIEW public.observersrolestatuscategories AS
      JOIN public.states e ON ((a.stateid = e.stateid)));
 
 
-ALTER TABLE public.observersrolestatuscategories OWNER TO "Tonyx";
 
 --
 -- Name: orderdetails; Type: VIEW; Schema: public; Owner: Tonyx
@@ -844,7 +801,6 @@ CREATE VIEW public.orderdetails AS
   ORDER BY a.startingtime;
 
 
-ALTER TABLE public.orderdetails OWNER TO "Tonyx";
 
 --
 -- Name: orderoutgroup_id_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -858,7 +814,6 @@ CREATE SEQUENCE public.orderoutgroup_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.orderoutgroup_id_seq OWNER TO "Tonyx";
 
 --
 -- Name: orderoutgroup; Type: TABLE; Schema: public; Owner: Tonyx
@@ -872,7 +827,6 @@ CREATE TABLE public.orderoutgroup (
 );
 
 
-ALTER TABLE public.orderoutgroup OWNER TO "Tonyx";
 
 --
 -- Name: suborderid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -886,7 +840,6 @@ CREATE SEQUENCE public.suborderid_seq
     CACHE 1;
 
 
-ALTER TABLE public.suborderid_seq OWNER TO "Tonyx";
 
 --
 -- Name: suborder; Type: TABLE; Schema: public; Owner: Tonyx
@@ -905,7 +858,6 @@ CREATE TABLE public.suborder (
 );
 
 
-ALTER TABLE public.suborder OWNER TO "Tonyx";
 
 --
 -- Name: orderitemdetails; Type: VIEW; Schema: public; Owner: Tonyx
@@ -944,7 +896,6 @@ CREATE VIEW public.orderitemdetails AS
      LEFT JOIN public.suborder f ON ((a.suborderid = f.suborderid)));
 
 
-ALTER TABLE public.orderitemdetails OWNER TO "Tonyx";
 
 --
 -- Name: orderitems_orderitemid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -958,7 +909,6 @@ CREATE SEQUENCE public.orderitems_orderitemid_seq
     CACHE 1;
 
 
-ALTER TABLE public.orderitems_orderitemid_seq OWNER TO "Tonyx";
 
 --
 -- Name: orderitems_orderitemid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -979,7 +929,6 @@ CREATE TABLE public.orderitemstates (
 );
 
 
-ALTER TABLE public.orderitemstates OWNER TO "Tonyx";
 
 --
 -- Name: orderitemstates_orderitemstates_id_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -993,7 +942,6 @@ CREATE SEQUENCE public.orderitemstates_orderitemstates_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.orderitemstates_orderitemstates_id_seq OWNER TO "Tonyx";
 
 --
 -- Name: orderitemstates_orderitemstates_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -1017,7 +965,6 @@ CREATE VIEW public.orderoutgroupdetails AS
      JOIN public.orders b ON ((a.orderid = b.orderid)));
 
 
-ALTER TABLE public.orderoutgroupdetails OWNER TO "Tonyx";
 
 --
 -- Name: orders_orderid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -1031,7 +978,6 @@ CREATE SEQUENCE public.orders_orderid_seq
     CACHE 1;
 
 
-ALTER TABLE public.orders_orderid_seq OWNER TO "Tonyx";
 
 --
 -- Name: orders_orderid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -1052,7 +998,6 @@ CREATE SEQUENCE public.paymentid_seq
     CACHE 1;
 
 
-ALTER TABLE public.paymentid_seq OWNER TO "Tonyx";
 
 --
 -- Name: paymentitem; Type: TABLE; Schema: public; Owner: Tonyx
@@ -1067,7 +1012,6 @@ CREATE TABLE public.paymentitem (
 );
 
 
-ALTER TABLE public.paymentitem OWNER TO "Tonyx";
 
 --
 -- Name: tendercodesid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -1081,7 +1025,6 @@ CREATE SEQUENCE public.tendercodesid_seq
     CACHE 1;
 
 
-ALTER TABLE public.tendercodesid_seq OWNER TO "Tonyx";
 
 --
 -- Name: tendercodes; Type: TABLE; Schema: public; Owner: Tonyx
@@ -1094,7 +1037,6 @@ CREATE TABLE public.tendercodes (
 );
 
 
-ALTER TABLE public.tendercodes OWNER TO "Tonyx";
 
 --
 -- Name: paymentitemdetails; Type: VIEW; Schema: public; Owner: Tonyx
@@ -1112,7 +1054,6 @@ CREATE VIEW public.paymentitemdetails AS
      JOIN public.tendercodes b ON ((a.tendercodesid = b.tendercodesid)));
 
 
-ALTER TABLE public.paymentitemdetails OWNER TO "Tonyx";
 
 --
 -- Name: printerforcategory_id_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -1126,7 +1067,6 @@ CREATE SEQUENCE public.printerforcategory_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.printerforcategory_id_seq OWNER TO "Tonyx";
 
 --
 -- Name: printerforcategory; Type: TABLE; Schema: public; Owner: Tonyx
@@ -1140,7 +1080,6 @@ CREATE TABLE public.printerforcategory (
 );
 
 
-ALTER TABLE public.printerforcategory OWNER TO "Tonyx";
 
 --
 -- Name: printers_id_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -1154,7 +1093,6 @@ CREATE SEQUENCE public.printers_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.printers_id_seq OWNER TO "Tonyx";
 
 --
 -- Name: printers; Type: TABLE; Schema: public; Owner: Tonyx
@@ -1166,7 +1104,6 @@ CREATE TABLE public.printers (
 );
 
 
-ALTER TABLE public.printers OWNER TO "Tonyx";
 
 --
 -- Name: printerforcategorydetail; Type: VIEW; Schema: public; Owner: Tonyx
@@ -1186,7 +1123,6 @@ CREATE VIEW public.printerforcategorydetail AS
      JOIN public.states e ON ((a.stateid = e.stateid)));
 
 
-ALTER TABLE public.printerforcategorydetail OWNER TO "Tonyx";
 
 --
 -- Name: printerforreceiptandinvoice_id_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -1200,7 +1136,6 @@ CREATE SEQUENCE public.printerforreceiptandinvoice_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.printerforreceiptandinvoice_id_seq OWNER TO "Tonyx";
 
 --
 -- Name: printerforreceiptandinvoice; Type: TABLE; Schema: public; Owner: Tonyx
@@ -1214,7 +1149,6 @@ CREATE TABLE public.printerforreceiptandinvoice (
 );
 
 
-ALTER TABLE public.printerforreceiptandinvoice OWNER TO "Tonyx";
 
 --
 -- Name: rejectedorderitems_id_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -1228,7 +1162,6 @@ CREATE SEQUENCE public.rejectedorderitems_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.rejectedorderitems_id_seq OWNER TO "Tonyx";
 
 --
 -- Name: rejectedorderitems; Type: TABLE; Schema: public; Owner: Tonyx
@@ -1243,7 +1176,6 @@ CREATE TABLE public.rejectedorderitems (
 );
 
 
-ALTER TABLE public.rejectedorderitems OWNER TO "Tonyx";
 
 --
 -- Name: roles_roleid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -1257,7 +1189,6 @@ CREATE SEQUENCE public.roles_roleid_seq
     CACHE 1;
 
 
-ALTER TABLE public.roles_roleid_seq OWNER TO "Tonyx";
 
 --
 -- Name: roles_roleid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -1278,7 +1209,6 @@ CREATE SEQUENCE public.tempuseractionablestates_seq
     CACHE 1;
 
 
-ALTER TABLE public.tempuseractionablestates_seq OWNER TO "Tonyx";
 
 --
 -- Name: temp_user_actionable_states; Type: TABLE; Schema: public; Owner: Tonyx
@@ -1291,7 +1221,6 @@ CREATE TABLE public.temp_user_actionable_states (
 );
 
 
-ALTER TABLE public.temp_user_actionable_states OWNER TO "Tonyx";
 
 --
 -- Name: temp_user_actionable_states_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -1305,7 +1234,6 @@ CREATE SEQUENCE public.temp_user_actionable_states_seq
     CACHE 1;
 
 
-ALTER TABLE public.temp_user_actionable_states_seq OWNER TO "Tonyx";
 
 --
 -- Name: temp_user_default_actionable_states; Type: TABLE; Schema: public; Owner: Tonyx
@@ -1317,7 +1245,6 @@ CREATE TABLE public.temp_user_default_actionable_states (
 );
 
 
-ALTER TABLE public.temp_user_default_actionable_states OWNER TO "Tonyx";
 
 --
 -- Name: users_userid_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -1331,7 +1258,6 @@ CREATE SEQUENCE public.users_userid_seq
     CACHE 1;
 
 
-ALTER TABLE public.users_userid_seq OWNER TO "Tonyx";
 
 --
 -- Name: users_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -1362,7 +1288,6 @@ CREATE VIEW public.usersview AS
   ORDER BY a.username;
 
 
-ALTER TABLE public.usersview OWNER TO "Tonyx";
 
 --
 -- Name: variations; Type: TABLE; Schema: public; Owner: Tonyx
@@ -1378,7 +1303,6 @@ CREATE TABLE public.variations (
 );
 
 
-ALTER TABLE public.variations OWNER TO "Tonyx";
 
 --
 -- Name: variationdetails; Type: VIEW; Schema: public; Owner: Tonyx
@@ -1404,7 +1328,6 @@ CREATE VIEW public.variationdetails AS
   ORDER BY b.name;
 
 
-ALTER TABLE public.variationdetails OWNER TO "Tonyx";
 
 --
 -- Name: variations_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -1418,7 +1341,6 @@ CREATE SEQUENCE public.variations_seq
     CACHE 1;
 
 
-ALTER TABLE public.variations_seq OWNER TO "Tonyx";
 
 --
 -- Name: variations_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -1439,7 +1361,6 @@ CREATE TABLE public.voidedorderslogbuffer (
 );
 
 
-ALTER TABLE public.voidedorderslogbuffer OWNER TO "Tonyx";
 
 --
 -- Name: voidedorderslog_id_seq; Type: SEQUENCE; Schema: public; Owner: Tonyx
@@ -1453,7 +1374,6 @@ CREATE SEQUENCE public.voidedorderslog_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.voidedorderslog_id_seq OWNER TO "Tonyx";
 
 --
 -- Name: voidedorderslog_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Tonyx
@@ -1474,7 +1394,6 @@ CREATE SEQUENCE public.waiteractionablestates_seq
     CACHE 1;
 
 
-ALTER TABLE public.waiteractionablestates_seq OWNER TO "Tonyx";
 
 --
 -- Name: waiteractionablestates; Type: TABLE; Schema: public; Owner: Tonyx
@@ -1487,7 +1406,6 @@ CREATE TABLE public.waiteractionablestates (
 );
 
 
-ALTER TABLE public.waiteractionablestates OWNER TO "Tonyx";
 
 --
 -- Name: archivedorderslogbuffer archivedlogbufferid; Type: DEFAULT; Schema: public; Owner: Tonyx
