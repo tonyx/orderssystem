@@ -16,16 +16,17 @@ let log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMe
 [<Literal>]
 let TPConnectionString = 
     "Server=127.0.0.1;"    + 
-    "Database=orderssystem;" + 
+    "Database=mrbilly;" + 
     "User Id=suave;"            + 
     "Password=1234;"
 
 let [<Literal>] dbVendor = Common.DatabaseProviderTypes.POSTGRESQL
 let [<Literal>] connexStringName = "DefaultConnectionString"
 
-let [<Literal>] resPath = "packages/Npgsql.2.2.1/lib/net45/"  // location of a valid Npgsql.dll file used at compile time by sql entity framework
+let [<Literal>] resPath = "/Users/Tonyx/Projects/mrbilly6/OrdersSystem/packages/Npgsql.2.2.1/lib/net45/"  // location of a valid Npgsql.dll file used at compile time by sql entity framework
 let [<Literal>] indivAmount = 1000
 let [<Literal>] useOptTypes  = false
+
 
 type Sql =
     SqlDataProvider< 
@@ -634,7 +635,7 @@ module Orders =
         ctx.SubmitUpdates() 
 
     let forceDeleteSubOrder (subOrderId:int) (ctx: DbContext) =
-        log.Debug(sprintf "%s %d" "safeDeleteSubOrder" subOrderId)
+        log.Debug(sprintf "%s %d" "forceDeleteSubOrder" subOrderId)
         let subOrder = getSubOrder subOrderId ctx
 
         let connectedPaymentItems = subOrder.``public.paymentitem by suborderid``
@@ -838,13 +839,15 @@ let getPrinterForReceiptAndInvoice printerId (ctx:DbContext) =
 let safeRemovePrinter printerId (ctx:DbContext) =
     log.Debug("safeRemovePrinter")
     let printer = getPrinter printerId ctx
-    let printerCourseCatAssociation = getPrinterForCourseCategoryAssociation printerId ctx
-    let printerReceiptAndInvoiceAssociation = getPrinterForReceiptAndInvoice printerId ctx
-    printerCourseCatAssociation |> Seq.iter (fun x -> x.Delete())
-    printerReceiptAndInvoiceAssociation |> Seq.iter (fun x -> x.Delete())
+    // let printerCourseCatAssociation = getPrinterForCourseCategoryAssociation printerId ctx
+    // let printerReceiptAndInvoiceAssociation = getPrinterForReceiptAndInvoice printerId ctx
+    // printerCourseCatAssociation |> Seq.iter (fun x -> x.Delete())
+    // printerReceiptAndInvoiceAssociation |> Seq.iter (fun x -> x.Delete())
     ctx.SubmitUpdates()
     printer.Delete()
     ctx.SubmitUpdates()
+
+
 
 let getAllCustomers (ctx:DbContext) =
     ctx.Public.Customerdata |> Seq.toList
@@ -910,11 +913,11 @@ let createInvoiceByOrderIdAndCustomerId orderId customerDataId invoiceText invoi
 
 let safeRemovePrinters (ctx:DbContext) =
     log.Debug("safeRemovePrinters")
-    ctx.Public.Printerforcategory |> Seq.iter (fun (x:PrinterForCourseCategory) -> x.Delete())
-    ctx.SubmitUpdates()
+    // ctx.Public.Printerforcategory |> Seq.iter (fun (x:PrinterForCourseCategory) -> x.Delete())
+    // ctx.SubmitUpdates()
 
-    ctx.Public.Printerforreceiptandinvoice |> Seq.iter (fun (x:PrinterForReceiptAndInvoice) -> x.Delete())
-    ctx.SubmitUpdates()
+    // ctx.Public.Printerforreceiptandinvoice |> Seq.iter (fun (x:PrinterForReceiptAndInvoice) -> x.Delete())
+    // ctx.SubmitUpdates()
 
     ctx.Public.Printers |> Seq.iter (fun (x:Printer) -> x.Delete())
     ctx.SubmitUpdates()
@@ -2392,20 +2395,22 @@ let isEnablerForRoleState (roleId:int) (stateId: int) (ctx:DbContext) =
 let safeRemoveOrderItem orderItemId (ctx:DbContext) =
     log.Debug (sprintf "%s %d" "safeRemoveOrderItem" orderItemId )
     let orderItem = ctx.Public.Orderitems |> Seq.find (fun (x:OrderItem) -> x.Orderitemid = orderItemId )
-    let states = orderItem.``public.orderitemstates by orderitemid``
-    states |> Seq.iter (fun (x:OrderItemState) -> x.Delete())
-    ctx.SubmitUpdates()
-    let variations = orderItem.``public.variations by orderitemid``
-    variations |> Seq.iter (fun (x:Variation) -> x.Delete())
-    ctx.SubmitUpdates()
 
-    let ingredientDecrements = orderItem.``public.ingredientdecrement by orderitemid``
-    ingredientDecrements |> Seq.iter (fun (x:IngredientDecrement) -> x.Delete())
-    ctx.SubmitUpdates()
+    // let states = orderItem.``public.orderitemstates by orderitemid``
+    // states |> Seq.iter (fun (x:OrderItemState) -> x.Delete())
+    // ctx.SubmitUpdates()
 
-    let rejectedOrderItems = orderItem.``public.rejectedorderitems by orderitemid``
-    rejectedOrderItems |> Seq.iter (fun (x:RejectedOrderItems) -> x.Delete())
-    ctx.SubmitUpdates()
+    // let variations = orderItem.``public.variations by orderitemid``
+    // variations |> Seq.iter (fun (x:Variation) -> x.Delete())
+    // ctx.SubmitUpdates()
+
+    // let ingredientDecrements = orderItem.``public.ingredientdecrement by orderitemid``
+    // ingredientDecrements |> Seq.iter (fun (x:IngredientDecrement) -> x.Delete())
+    // ctx.SubmitUpdates()
+
+    // let rejectedOrderItems = orderItem.``public.rejectedorderitems by orderitemid``
+    // rejectedOrderItems |> Seq.iter (fun (x:RejectedOrderItems) -> x.Delete())
+    // ctx.SubmitUpdates()
 
     orderItem.Delete()
     ctx.SubmitUpdates()
@@ -2467,25 +2472,29 @@ let getOrderItemOfGroup groupId (ctx:DbContext) =
 let safeRemoveOrder orderId (ctx:DbContext) =
     log.Debug(sprintf "%s %d" "safeRemoveOrder" orderId)
     let order = ctx.Public.Orders |> Seq.find (fun (x:Order) -> x.Orderid = orderId)
-    let orderItems = order.``public.orderitems by orderid`` 
-    let voidedOrderItemList = order.``public.voidedorderslogbuffer by orderid``
 
-    let archivedOrderItemList = order.``public.archivedorderslogbuffer by orderid``
-    let connectedInvoices = order.``public.invoices by orderid``
+    // let orderItems = order.``public.orderitems by orderid`` 
+    
+    // let voidedOrdersList = order.``public.voidedorderslogbuffer by orderid``
+
+    // let archivedOrdersList = order.``public.archivedorderslogbuffer by orderid``
+    let connectedInvoices  = order.``public.invoices by orderid``
     let connectedSuborders = order.``public.suborder by orderid``
 
     let connectedPaymentItems = order.``public.paymentitem by orderid``
 
     let outGroupOrders = order.``public.orderoutgroup by orderid``
     
-    Seq.iter (fun (x:OrderItem) -> safeRemoveOrderItem x.Orderitemid ctx) orderItems
+    // Seq.iter (fun (x:OrderItem) -> safeRemoveOrderItem x.Orderitemid ctx) orderItems
+
     Seq.iter (fun (x:PaymentItem) -> x.Delete()) connectedPaymentItems
     ctx.SubmitUpdates()
 
-    Seq.iter (fun (x:VoidedOrdersLogBuffer) -> x.Delete()) voidedOrderItemList
-    ctx.SubmitUpdates()
-    Seq.iter (fun (x:ArchivedorderLogBuffer) -> x.Delete()) archivedOrderItemList
-    ctx.SubmitUpdates()
+    // Seq.iter (fun (x:VoidedOrdersLogBuffer) -> x.Delete()) voidedOrdersList
+    // ctx.SubmitUpdates()
+
+    // Seq.iter (fun (x:ArchivedorderLogBuffer) -> x.Delete()) archivedOrdersList
+    // ctx.SubmitUpdates()
 
 
     Seq.iter (fun (x:SubOrder) ->  Orders.forceDeleteSubOrder x.Suborderid ctx) connectedSuborders
@@ -2563,15 +2572,19 @@ let getAllRejectedOrderItemOfACourse courseId (ctx:DbContext) =
 
 let safeDeleteCourse (course:Course) (ctx:DbContext) =
     log.Debug("safeDeleteCourse")
-    let connectedOrderItems = getAllOrderItemsOfCourse course.Courseid ctx
-    let rejectedOrderItemlist = getAllRejectedOrderItemOfACourse course.Courseid ctx
-    Seq.iter (fun (x:RejectedOrderItems) -> x.Delete()) rejectedOrderItemlist
-    ctx.SubmitUpdates()
-    Seq.iter (fun (x:OrderItem) -> safeRemoveOrderItem x.Orderitemid ctx ) connectedOrderItems
-    ctx.SubmitUpdates()
-    let connectedIngredientCourses = getAllIngredientCourse course.Courseid ctx
-    Seq.iter (fun (x:IngredientCourse) -> x.Delete()) connectedIngredientCourses
-    ctx.SubmitUpdates()
+    // let connectedOrderItems = getAllOrderItemsOfCourse course.Courseid ctx
+    // let rejectedOrderItemlist = getAllRejectedOrderItemOfACourse course.Courseid ctx
+
+    // Seq.iter (fun (x:RejectedOrderItems) -> x.Delete()) rejectedOrderItemlist
+    // ctx.SubmitUpdates()
+
+    // Seq.iter (fun (x:OrderItem) -> safeRemoveOrderItem x.Orderitemid ctx ) connectedOrderItems
+    // ctx.SubmitUpdates()
+
+    // let connectedIngredientCourses = getAllIngredientCourse course.Courseid ctx
+    // Seq.iter (fun (x:IngredientCourse) -> x.Delete()) connectedIngredientCourses
+    // ctx.SubmitUpdates()
+
     course.Delete()
     ctx.SubmitUpdates()
 
