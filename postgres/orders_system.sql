@@ -2504,8 +2504,14 @@ ALTER TABLE ONLY public.variations
 -- Name: printerforcategory category_printer_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.printerforcategory
+--    ADD CONSTRAINT category_printer_fk FOREIGN KEY (printerid) REFERENCES public.printers(printerid) MATCH FULL;
+
+
+
 ALTER TABLE ONLY public.printerforcategory
-    ADD CONSTRAINT category_printer_fk FOREIGN KEY (printerid) REFERENCES public.printers(printerid) MATCH FULL;
+    ADD CONSTRAINT category_printer_fk FOREIGN KEY (printerid) REFERENCES public.printers(printerid) MATCH FULL ON DELETE CASCADE;
+
 
 
 --
@@ -2520,8 +2526,12 @@ ALTER TABLE ONLY public.courses
 -- Name: orderitems coursefk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.orderitems
+ --   ADD CONSTRAINT coursefk FOREIGN KEY (courseid) REFERENCES public.courses(courseid) MATCH FULL;
+
 ALTER TABLE ONLY public.orderitems
-    ADD CONSTRAINT coursefk FOREIGN KEY (courseid) REFERENCES public.courses(courseid) MATCH FULL;
+    ADD CONSTRAINT coursefk FOREIGN KEY (courseid) REFERENCES public.courses(courseid) MATCH FULL ON DELETE CASCADE;
+
 
 
 --
@@ -2568,8 +2578,12 @@ ALTER TABLE ONLY public.ingredient
 -- Name: ingredientcourse ingredientcourse_course_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.ingredientcourse
+--    ADD CONSTRAINT ingredientcourse_course_fk FOREIGN KEY (courseid) REFERENCES public.courses(courseid) MATCH FULL;
+
+
 ALTER TABLE ONLY public.ingredientcourse
-    ADD CONSTRAINT ingredientcourse_course_fk FOREIGN KEY (courseid) REFERENCES public.courses(courseid) MATCH FULL;
+    ADD CONSTRAINT ingredientcourse_course_fk FOREIGN KEY (courseid) REFERENCES public.courses(courseid) MATCH FULL ON DELETE CASCADE;
 
 
 --
@@ -2600,8 +2614,13 @@ ALTER TABLE ONLY public.invoices
 -- Name: printerforreceiptandinvoice invoice_receipt_printer_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+
+--ALTER TABLE ONLY public.printerforreceiptandinvoice
+--    ADD CONSTRAINT invoice_receipt_printer_fk FOREIGN KEY (printerid) REFERENCES public.printers(printerid) MATCH FULL;
+
+
 ALTER TABLE ONLY public.printerforreceiptandinvoice
-    ADD CONSTRAINT invoice_receipt_printer_fk FOREIGN KEY (printerid) REFERENCES public.printers(printerid) MATCH FULL;
+    ADD CONSTRAINT invoice_receipt_printer_fk FOREIGN KEY (printerid) REFERENCES public.printers(printerid) MATCH FULL ON DELETE CASCADE;
 
 
 --
@@ -2616,8 +2635,11 @@ ALTER TABLE ONLY public.paymentitem
 -- Name: archivedorderslogbuffer order_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.archivedorderslogbuffer
+--    ADD CONSTRAINT order_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+
 ALTER TABLE ONLY public.archivedorderslogbuffer
-    ADD CONSTRAINT order_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+    ADD CONSTRAINT order_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL ON DELETE CASCADE;
 
 
 --
@@ -2632,24 +2654,38 @@ ALTER TABLE ONLY public.invoices
 -- Name: orderitems orderdetail_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.orderitems
+--    ADD CONSTRAINT orderdetail_fk FOREIGN KEY (ordergroupid) REFERENCES public.orderoutgroup(ordergroupid) MATCH FULL;
+
+
 ALTER TABLE ONLY public.orderitems
-    ADD CONSTRAINT orderdetail_fk FOREIGN KEY (ordergroupid) REFERENCES public.orderoutgroup(ordergroupid) MATCH FULL;
+    ADD CONSTRAINT orderdetail_fk FOREIGN KEY (ordergroupid) REFERENCES public.orderoutgroup(ordergroupid) MATCH FULL ON DELETE CASCADE;
+
 
 
 --
 -- Name: orderitems orderfk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.orderitems
+ --   ADD CONSTRAINT orderfk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+
+
 ALTER TABLE ONLY public.orderitems
-    ADD CONSTRAINT orderfk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+    ADD CONSTRAINT orderfk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL ON DELETE CASCADE;
+
 
 
 --
 -- Name: orderitemstates orderitem_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.orderitemstates
+--    ADD CONSTRAINT orderitem_fk FOREIGN KEY (orderitemid) REFERENCES public.orderitems(orderitemid) MATCH FULL;
+
+
 ALTER TABLE ONLY public.orderitemstates
-    ADD CONSTRAINT orderitem_fk FOREIGN KEY (orderitemid) REFERENCES public.orderitems(orderitemid) MATCH FULL;
+    ADD CONSTRAINT orderitem_fk FOREIGN KEY (orderitemid) REFERENCES public.orderitems(orderitemid) MATCH FULL ON DELETE CASCADE;
 
 
 --
@@ -2658,6 +2694,11 @@ ALTER TABLE ONLY public.orderitemstates
 
 ALTER TABLE ONLY public.ingredientdecrement
     ADD CONSTRAINT orderitem_fk FOREIGN KEY (orderitemid) REFERENCES public.orderitems(orderitemid) MATCH FULL;
+
+
+ALTER TABLE ONLY public.ingredientdecrement
+    ADD CONSTRAINT orderitem_fk FOREIGN KEY (orderitemid) REFERENCES public.orderitems(orderitemid) MATCH FULL ON DELETE CASCADE;
+
 
 
 --
@@ -2704,16 +2745,24 @@ ALTER TABLE ONLY public.printerforcategory
 -- Name: rejectedorderitems reject_orderitem_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.rejectedorderitems
+--    ADD CONSTRAINT reject_orderitem_fk FOREIGN KEY (orderitemid) REFERENCES public.orderitems(orderitemid) MATCH FULL;
+
 ALTER TABLE ONLY public.rejectedorderitems
-    ADD CONSTRAINT reject_orderitem_fk FOREIGN KEY (orderitemid) REFERENCES public.orderitems(orderitemid) MATCH FULL;
+    ADD CONSTRAINT reject_orderitem_fk FOREIGN KEY (orderitemid) REFERENCES public.orderitems(orderitemid) MATCH FULL ON DELETE CASCADE;
+
 
 
 --
 -- Name: rejectedorderitems rejected_item_course_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.rejectedorderitems
+--    ADD CONSTRAINT rejected_item_course_fk FOREIGN KEY (courseid) REFERENCES public.courses(courseid) MATCH FULL;
+
+
 ALTER TABLE ONLY public.rejectedorderitems
-    ADD CONSTRAINT rejected_item_course_fk FOREIGN KEY (courseid) REFERENCES public.courses(courseid) MATCH FULL;
+    ADD CONSTRAINT rejected_item_course_fk FOREIGN KEY (courseid) REFERENCES public.courses(courseid) MATCH FULL ON DELETE CASCADE;
 
 
 --
@@ -2746,6 +2795,12 @@ ALTER TABLE ONLY public.observers
 
 ALTER TABLE ONLY public.orderitemstates
     ADD CONSTRAINT state2_fk FOREIGN KEY (stateid) REFERENCES public.states(stateid) MATCH FULL;
+
+
+ALTER TABLE ONLY public.orderitemstates
+    ADD CONSTRAINT state2_fk FOREIGN KEY (stateid) REFERENCES public.states(stateid) MATCH FULL 
+    ON DELETE CASCADE;
+
 
 
 --
@@ -2840,8 +2895,12 @@ ALTER TABLE ONLY public.variations
 -- Name: variations variationorderitem_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.variations
+ --   ADD CONSTRAINT variationorderitem_fk FOREIGN KEY (orderitemid) REFERENCES public.orderitems(orderitemid) MATCH FULL;
+
+
 ALTER TABLE ONLY public.variations
-    ADD CONSTRAINT variationorderitem_fk FOREIGN KEY (orderitemid) REFERENCES public.orderitems(orderitemid) MATCH FULL;
+    ADD CONSTRAINT variationorderitem_fk FOREIGN KEY (orderitemid) REFERENCES public.orderitems(orderitemid) MATCH FULL ON DELETE CASCADE;
 
 
 --
@@ -2856,8 +2915,12 @@ ALTER TABLE ONLY public.voidedorderslogbuffer
 -- Name: voidedorderslogbuffer voided_order_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.voidedorderslogbuffer
+--    ADD CONSTRAINT voided_order_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+
+
 ALTER TABLE ONLY public.voidedorderslogbuffer
-    ADD CONSTRAINT voided_order_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+    ADD CONSTRAINT voided_order_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL ON DELETE CASCADE;
 
 
 --
