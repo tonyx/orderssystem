@@ -638,11 +638,12 @@ module Orders =
         log.Debug(sprintf "%s %d" "forceDeleteSubOrder" subOrderId)
         let subOrder = getSubOrder subOrderId ctx
 
-        let connectedPaymentItems = subOrder.``public.paymentitem by suborderid``
+        // let connectedPaymentItems = subOrder.``public.paymentitem by suborderid``
 
-        let connectedInvoices = subOrder.``public.invoices by suborderid``
-        let _ = connectedInvoices |> Seq.iter (fun (x:Invoice) -> x.Delete() )
-        let _ = connectedPaymentItems |> Seq.iter (fun (x:PaymentItem) -> x.Delete())
+        // let connectedInvoices = subOrder.``public.invoices by suborderid``
+        // let _ = connectedInvoices |> Seq.iter (fun (x:Invoice) -> x.Delete() )
+
+        // let _ = connectedPaymentItems |> Seq.iter (fun (x:PaymentItem) -> x.Delete())
 
         let orderItems = getOrderItemsOfSubOrder subOrderId ctx
         let _ = orderItems |> List.iter(fun (x:OrderItem) -> x.Suborderid <- 0; x.Isinsasuborder <- false) // null
@@ -701,11 +702,11 @@ let safeDeleteSubOrder (subOrderId:int) (ctx: DbContext) =
     log.Debug(sprintf "%s %d" "safeDeleteSubOrder" subOrderId)
     let subOrder = Orders.getSubOrder subOrderId ctx
 
-    let connectedInvoices = subOrder.``public.invoices by suborderid``
-    let connectedPaymentItems = subOrder.``public.paymentitem by suborderid``
+    // let connectedInvoices = subOrder.``public.invoices by suborderid``
+    // let connectedPaymentItems = subOrder.``public.paymentitem by suborderid``
 
-    let _ = connectedInvoices |> Seq.iter (fun (x:Invoice) -> x.Delete() )
-    let _ = connectedPaymentItems |> Seq.iter (fun (x:PaymentItem) -> x.Delete())
+    // let _ = connectedInvoices |> Seq.iter (fun (x:Invoice) -> x.Delete() )
+    // let _ = connectedPaymentItems |> Seq.iter (fun (x:PaymentItem) -> x.Delete())
 
     ctx.SubmitUpdates()
 
@@ -2431,7 +2432,7 @@ let setOrderAsPayed orderId (ctx:DbContext) =
     ctx.SubmitUpdates()
 let splitOrderItemInToUnitaryOrderItems id  (ctx:DbContext) =
     log.Debug(sprintf "%s %d " "splitOrderItemInToUnitaryOrderItems" id)
-    let orderItem = Orders.getOrderItemById id ctx
+    // let orderItem = Orders.getOrderItemById id ctx
     let theOrderItem = getTheOrderItemById id ctx
     let connectedOrderItemStates = theOrderItem.``public.orderitemstates by orderitemid`` |> Seq.toList
     let ingredientdecrements = theOrderItem.``public.ingredientdecrement by orderitemid`` |> Seq.toList
@@ -2478,17 +2479,17 @@ let safeRemoveOrder orderId (ctx:DbContext) =
     // let voidedOrdersList = order.``public.voidedorderslogbuffer by orderid``
 
     // let archivedOrdersList = order.``public.archivedorderslogbuffer by orderid``
-    let connectedInvoices  = order.``public.invoices by orderid``
-    let connectedSuborders = order.``public.suborder by orderid``
+    // let connectedInvoices  = order.``public.invoices by orderid``
+    // let connectedSuborders = order.``public.suborder by orderid``
 
-    let connectedPaymentItems = order.``public.paymentitem by orderid``
+    // let connectedPaymentItems = order.``public.paymentitem by orderid``
 
-    let outGroupOrders = order.``public.orderoutgroup by orderid``
+    // let outGroupOrders = order.``public.orderoutgroup by orderid``
     
     // Seq.iter (fun (x:OrderItem) -> safeRemoveOrderItem x.Orderitemid ctx) orderItems
 
-    Seq.iter (fun (x:PaymentItem) -> x.Delete()) connectedPaymentItems
-    ctx.SubmitUpdates()
+    // Seq.iter (fun (x:PaymentItem) -> x.Delete()) connectedPaymentItems
+    // ctx.SubmitUpdates()
 
     // Seq.iter (fun (x:VoidedOrdersLogBuffer) -> x.Delete()) voidedOrdersList
     // ctx.SubmitUpdates()
@@ -2497,15 +2498,15 @@ let safeRemoveOrder orderId (ctx:DbContext) =
     // ctx.SubmitUpdates()
 
 
-    Seq.iter (fun (x:SubOrder) ->  Orders.forceDeleteSubOrder x.Suborderid ctx) connectedSuborders
+    // Seq.iter (fun (x:SubOrder) ->  Orders.forceDeleteSubOrder x.Suborderid ctx) connectedSuborders
+    // ctx.SubmitUpdates()
 
-    ctx.SubmitUpdates()
-    Seq.iter (fun (x:Invoice) -> x.Delete()) connectedInvoices
-    ctx.SubmitUpdates()
+    // Seq.iter (fun (x:Invoice) -> x.Delete()) connectedInvoices
+    // ctx.SubmitUpdates()
 
-    Seq.iter (fun (x:OrderOutGroup) -> x.Delete()) outGroupOrders
+    // Seq.iter (fun (x:OrderOutGroup) -> x.Delete()) outGroupOrders
+    // ctx.SubmitUpdates()
 
-    ctx.SubmitUpdates()
     order.Delete()
     ctx.SubmitUpdates()
 
@@ -2519,12 +2520,14 @@ let safeDeleteUser userId (ctx:DbContext) =
     log.Debug("safeDeleteUser")
     let user = getUserById userId ctx
     let connectedOrders = getAllOrdersOfUser userId ctx
-    let connectedIngredientDecrements = user.``public.ingredientdecrement by userid``
+
+    // let connectedIngredientDecrements = user.``public.ingredientdecrement by userid``
+
     let connectedIngredientIncrements = user.``public.ingredientincrement by userid``
     Seq.iter (fun (x:Order) -> safeRemoveOrder x.Orderid ctx) connectedOrders
     let connecteActionableStates = getAllActionableStateOfUser userId ctx
     Seq.iter (fun (x:WaiterActionableState) -> x.Delete()) connecteActionableStates
-    Seq.iter (fun (x:IngredientDecrement) ->  x.Delete()) connectedIngredientDecrements
+    // Seq.iter (fun (x:IngredientDecrement) ->  x.Delete()) connectedIngredientDecrements
     Seq.iter (fun (x:IngredientIncrement) ->  x.Delete()) connectedIngredientIncrements
     ctx.SubmitUpdates()
     user.Delete()

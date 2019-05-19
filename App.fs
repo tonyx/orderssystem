@@ -58,8 +58,6 @@ let reset =
    >=> unsetPair StateCookie
    >=> Redirection.FOUND Path.home
 
-
-
 let session f = 
    statefulForSession
    >=> context (fun x -> 
@@ -2236,11 +2234,6 @@ let askConfirmationVoidOrderByUserLoggedOn orderId encodedBackUrl (user: UserLog
     log.Debug(sprintf "%s order: %d  user: %s" "askConfirmationVoidOrderByUserLoggedOn" orderId user.Username)
     View.askConfirmationVoidOrderByUserLoggedOn orderId encodedBackUrl (user: UserLoggedOnSession) |> html
 
-
-
-
-
-
 let deleteIngredientToCourse courseId ingredientId =
     log.Debug("deleteIngredientToCourse")
     let ctx = Db.getContext()
@@ -3451,7 +3444,7 @@ let webPart =
         path Path.Admin.recognizePrinters >=> admin  recognizePrinters
         pathScan Path.Admin.managePrinter (fun (printerId,categoryId) -> admin (managePrinter printerId categoryId))
         path Path.Admin.resetPrinters >=> admin resetPrinters
-        path Path.Admin.info >=> admin about
+        path Path.Admin.info >=>  about
         path Path.Admin.printers >=> admin adminPrinters
         path Path.Admin.visibleIngredientCategories >=> canManageIngredients visibleingredientCategories
         pathScan Path.Admin.editIngredientCategory (fun id -> (canManageIngredientsPassingUserLoggedOn (editIngredientCategory id)))

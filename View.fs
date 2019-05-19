@@ -1506,6 +1506,7 @@ let controlPanel (user:UserLoggedOnSession) (dbUser: Db.User)=
         myOrdersButtonSingles
         logOffButton
         deleteObjectsPage user
+        optimizeVoidedLink dbUser
     ]
 
 let coursesAndCategoriesManagement  (categories:Db.CourseCategories list) =
