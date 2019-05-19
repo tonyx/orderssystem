@@ -2212,12 +2212,17 @@ ALTER TABLE ONLY public.orderitems
     ADD CONSTRAINT orderitems_pkey PRIMARY KEY (orderitemid);
 
 
+
+
 --
 -- Name: orderitemstates orderitemstates_pkey; Type: CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
 ALTER TABLE ONLY public.orderitemstates
     ADD CONSTRAINT orderitemstates_pkey PRIMARY KEY (orderitemstatesid);
+
+
+
 
 
 --
@@ -2627,8 +2632,12 @@ ALTER TABLE ONLY public.printerforreceiptandinvoice
 -- Name: paymentitem oorder_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.paymentitem
+--    ADD CONSTRAINT oorder_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+
+
 ALTER TABLE ONLY public.paymentitem
-    ADD CONSTRAINT oorder_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+    ADD CONSTRAINT oorder_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL ON DELETE CASCADE;
 
 
 --
@@ -2646,8 +2655,12 @@ ALTER TABLE ONLY public.archivedorderslogbuffer
 -- Name: invoices order_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.invoices
+--    ADD CONSTRAINT order_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+
+
 ALTER TABLE ONLY public.invoices
-    ADD CONSTRAINT order_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+    ADD CONSTRAINT order_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL ON DELETE CASCADE;
 
 
 --
@@ -2675,6 +2688,11 @@ ALTER TABLE ONLY public.orderitems
     ADD CONSTRAINT orderfk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL ON DELETE CASCADE;
 
 
+ALTER TABLE ONLY public.orderitems
+    ADD CONSTRAINT suborderfk FOREIGN KEY (suborderid) REFERENCES public.suborder(suborderid) MATCH FULL ON DELETE set null;
+
+
+
 
 --
 -- Name: orderitemstates orderitem_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
@@ -2692,8 +2710,8 @@ ALTER TABLE ONLY public.orderitemstates
 -- Name: ingredientdecrement orderitem_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
-ALTER TABLE ONLY public.ingredientdecrement
-    ADD CONSTRAINT orderitem_fk FOREIGN KEY (orderitemid) REFERENCES public.orderitems(orderitemid) MATCH FULL;
+--ALTER TABLE ONLY public.ingredientdecrement
+--    ADD CONSTRAINT orderitem_fk FOREIGN KEY (orderitemid) REFERENCES public.orderitems(orderitemid) MATCH FULL;
 
 
 ALTER TABLE ONLY public.ingredientdecrement
@@ -2713,16 +2731,24 @@ ALTER TABLE ONLY public.orderitems
 -- Name: orderoutgroup orderoutgroup_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.orderoutgroup
+--    ADD CONSTRAINT orderoutgroup_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+
+
 ALTER TABLE ONLY public.orderoutgroup
-    ADD CONSTRAINT orderoutgroup_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+    ADD CONSTRAINT orderoutgroup_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL ON DELETE CASCADE;
 
 
 --
 -- Name: ingredientdecrement preparator_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.ingredientdecrement
+--    ADD CONSTRAINT preparator_fk FOREIGN KEY (preparatorid) REFERENCES public.users(userid) MATCH FULL;
+
 ALTER TABLE ONLY public.ingredientdecrement
-    ADD CONSTRAINT preparator_fk FOREIGN KEY (preparatorid) REFERENCES public.users(userid) MATCH FULL;
+    ADD CONSTRAINT preparator_fk FOREIGN KEY (preparatorid) REFERENCES public.users(userid) MATCH FULL ON DELETE CASCADE;
+
 
 
 --
@@ -2793,8 +2819,8 @@ ALTER TABLE ONLY public.observers
 -- Name: orderitemstates state2_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
-ALTER TABLE ONLY public.orderitemstates
-    ADD CONSTRAINT state2_fk FOREIGN KEY (stateid) REFERENCES public.states(stateid) MATCH FULL;
+--ALTER TABLE ONLY public.orderitemstates
+--    ADD CONSTRAINT state2_fk FOREIGN KEY (stateid) REFERENCES public.states(stateid) MATCH FULL;
 
 
 ALTER TABLE ONLY public.orderitemstates
@@ -2802,6 +2828,9 @@ ALTER TABLE ONLY public.orderitemstates
     ON DELETE CASCADE;
 
 
+
+ALTER TABLE ONLY public.invoices
+    ADD CONSTRAINT suborder_fk FOREIGN KEY (suborderid) REFERENCES public.suborder(suborderid) MATCH FULL ON DELETE CASCADE;
 
 --
 -- Name: enablers state_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
@@ -2819,20 +2848,28 @@ ALTER TABLE ONLY public.invoices
     ADD CONSTRAINT suborder_fk FOREIGN KEY (suborderid) REFERENCES public.suborder(suborderid) MATCH FULL;
 
 
+
 --
 -- Name: paymentitem suborder_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.paymentitem
+--    ADD CONSTRAINT suborder_fk FOREIGN KEY (suborderid) REFERENCES public.suborder(suborderid) MATCH FULL;
+
 ALTER TABLE ONLY public.paymentitem
-    ADD CONSTRAINT suborder_fk FOREIGN KEY (suborderid) REFERENCES public.suborder(suborderid) MATCH FULL;
+    ADD CONSTRAINT suborder_fk FOREIGN KEY (suborderid) REFERENCES public.suborder(suborderid) MATCH FULL ON DELETE CASCADE;
 
 
 --
 -- Name: suborder suborderorder_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.suborder
+--    ADD CONSTRAINT suborderorder_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+
+
 ALTER TABLE ONLY public.suborder
-    ADD CONSTRAINT suborderorder_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL;
+    ADD CONSTRAINT suborderorder_fk FOREIGN KEY (orderid) REFERENCES public.orders(orderid) MATCH FULL ON DELETE CASCADE;
 
 
 --
@@ -2864,15 +2901,20 @@ ALTER TABLE ONLY public.temp_user_actionable_states
 --
 
 ALTER TABLE ONLY public.paymentitem
-    ADD CONSTRAINT tendercode_fk FOREIGN KEY (tendercodesid) REFERENCES public.tendercodes(tendercodesid) MATCH FULL;
+   ADD CONSTRAINT tendercode_fk FOREIGN KEY (tendercodesid) REFERENCES public.tendercodes(tendercodesid) MATCH FULL;
+
 
 
 --
 -- Name: ingredientincrement user_fk; Type: FK CONSTRAINT; Schema: public; Owner: Tonyx
 --
 
+--ALTER TABLE ONLY public.ingredientincrement
+--    ADD CONSTRAINT user_fk FOREIGN KEY (userid) REFERENCES public.users(userid) MATCH FULL;
+
+
 ALTER TABLE ONLY public.ingredientincrement
-    ADD CONSTRAINT user_fk FOREIGN KEY (userid) REFERENCES public.users(userid) MATCH FULL;
+    ADD CONSTRAINT user_fk FOREIGN KEY (userid) REFERENCES public.users(userid) MATCH FULL ON DELETE CASCADE;
 
 
 --
