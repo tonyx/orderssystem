@@ -3,7 +3,7 @@
   A tool for processing restaurant orders from the collection to the payment, emitting valid fiscal receipt.
   
   # news: 
-  *I'm not maintaining this project anymore*, but rather I'm wodking on the portng on .net core 3.0: https://github.com/tonyx/orderssystem_core
+  **I'm not maintaining this project anymore**, but rather I'm wodking on the portng on .net core 3.0: https://github.com/tonyx/orderssystem_core
 
 
 ## Getting Started
