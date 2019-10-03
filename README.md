@@ -1,6 +1,7 @@
 # Orders System
 
   A tool for processing restaurant orders from the collection to the payment, emitting valid fiscal receipt.
+  info: this project is replaced by the version working on .net core 3.0, available here: https://github.com/tonyx/orderssystem_core
 
 
 ## Getting Started
